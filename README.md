@@ -29,6 +29,14 @@ npm run placeholders # rigenera le immagini segnaposto
 Si pubblica caricando `dist/` su qualsiasi hosting statico (Netlify, Cloudflare
 Pages, Vercel) oppure via FTP sull'hosting Aruba attuale.
 
+### Anteprima condivisibile
+
+`npm run anteprima` produce `dist-anteprima/completo.html`: home e area tessera
+in un unico file autonomo, con CSS, script, font e immagini come data URI e la
+navigazione fra le due viste gestita via hash. Serve solo per far vedere il
+lavoro prima che ci sia un hosting — in produzione va `dist/`, dove il browser
+mette in cache i singoli asset invece di riscaricare un documento da ~8 MB.
+
 ---
 
 ## Cosa manca prima di andare online
