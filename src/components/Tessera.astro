@@ -16,8 +16,8 @@ import Section from './Section.astro';
 import tessera from '../images/tessera.jpg';
 import { site } from '../data/site';
 
-// TODO: sostituire con l'URL reale della domanda di ammissione (app PHP esistente).
-const urlIscrizione = site.tesseramento.urlOnline || '#contatti';
+/** La pagina Area tessera; se il cliente ha un tesseramento online CSEN, vince quello. */
+const urlIscrizione = site.tesseramento.urlOnline || '/tessera/';
 
 const passaggi = [
   {

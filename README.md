@@ -158,9 +158,43 @@ copre la parte pubblica — presentare il circolo, la ludoteca, gli eventi, e
 portare la persona a iscriversi o a prenotare. Le sezioni "Tessera" e
 "Prenotazioni" spiegano come funziona e poi rimandano all'applicazione.
 
-Due costanti da collegare quando si decide dove vive l'applicazione:
+### La pagina Area tessera
 
-- `urlIscrizione` in `src/components/Tessera.astro`
+`/tessera/` ricostruisce la domanda di ammissione e la Compagnia Card nel
+design del circolo, con gli stessi campi dell'applicazione attuale, il riquadro
+per la firma e il codice a barre Code 39 (`src/lib/code39.ts`) — un barcode
+vero, che il gestionale di cassa legge davvero.
+
+**Il modulo è volutamente non inviabile finché non lo colleghi.** Qui passano
+codice fiscale, data di nascita, indirizzo e firma: un modulo che finisce nel
+vuoto, con questi dati, è peggio di nessun modulo. Per attivarlo:
+
+```ts
+// src/data/site.ts
+tesseramento: {
+  endpointRegistrazione: 'https://.../registrazione.php',
+  endpointAccesso: 'https://.../login.php',
+}
+```
+
+Solo su **https**. I nomi dei campi inviati sono: `nome`, `luogoNascita`,
+`dataNascita`, `comuneResidenza`, `indirizzoResidenza`, `codiceFiscale`,
+`telefono`, `professione`, `tutore`, `email`, `password`, `firma` (PNG in data
+URI), `consensoAmmissione`, `consensoNewsletter`. Se il backend attuale usa
+nomi diversi, si adeguano in `src/pages/tessera.astro`.
+
+Due note su cosa ho cambiato rispetto all'applicazione esistente:
+
+- **Password: minimo 10 caratteri invece di 4.** Quattro caratteri per un
+  account che contiene codice fiscale, data di nascita e indirizzo non sono
+  difendibili. Il vincolo qui è lato browser: va alzato anche nel backend.
+- **La tessera non è più viola.** Il gradiente viola-magenta dell'app non
+  appartiene a nessuna parte del marchio. Resta chiaro solo il riquadro del
+  codice a barre, perché i lettori ottici hanno bisogno di barre scure su fondo
+  chiaro.
+
+### Le altre costanti da collegare
+
 - `urlPrenotaEvento` e `urlTavoloPersonalizzato` in `src/components/Prenotazioni.astro`
 
 Puntarle alle pagine PHP esistenti è sufficiente per andare online.

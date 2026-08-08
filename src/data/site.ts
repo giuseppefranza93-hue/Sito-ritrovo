@@ -72,6 +72,17 @@ export const site = {
     // TODO: importo della quota e link al tesseramento online scontato.
     quota: '',
     urlOnline: '',
+
+    /**
+     * Dove il modulo "Crea tessera" invia i dati: la pagina PHP esistente, o
+     * qualunque cosa la sostituisca. Finché è vuoto il modulo resta visibile ma
+     * non inviabile, con una spiegazione al posto del pulsante.
+     *
+     * Non attivarlo su un indirizzo http:// — qui viaggiano codice fiscale,
+     * data di nascita, indirizzo e firma.
+     */
+    endpointRegistrazione: '',
+    endpointAccesso: '',
   },
 
   /**
