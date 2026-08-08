@@ -1,0 +1,134 @@
+---
+/**
+ * The practical strip: when we are open, where we are, how to write to us.
+ *
+ * On a venue site this is the most-wanted information on mobile, and on most
+ * of them it is buried in the footer. It stays directly under the hero.
+ */
+import { site, indirizzoCompleto, hoursInWeekOrder } from '../data/site';
+---
+
+<aside class="bg-notte-raised border-notte-line border-y" aria-label="Informazioni pratiche">
+  <div class="container-page">
+    <div class="divide-notte-line grid divide-y sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+      <!-- Open/closed is filled in by the browser: a static build has no idea
+           what time it is when someone actually visits. -->
+      <div class="py-6 sm:py-7 sm:pr-8">
+        <p class="eyebrow">Quando siamo aperti</p>
+        <p class="font-display mt-2.5 text-xl font-semibold" data-hours-status>Mercoledì, venerdì e domenica</p>
+        <p class="mt-1 text-sm text-crema/60" data-hours-detail>
+          <a href="#community" class="underline underline-offset-4 hover:text-crema">Vedi tutti gli orari</a>
+        </p>
+      </div>
+
+      <div class="py-6 sm:px-8 sm:py-7">
+        <p class="eyebrow">Dove siamo</p>
+        <p class="font-display mt-2.5 text-xl font-semibold">{site.address.street}</p>
+        <p class="mt-1 text-sm text-crema/60">
+          {site.address.postalCode} {site.address.city} {site.address.province} ·
+          <a href={site.mapsUrl} target="_blank" rel="noopener" class="underline underline-offset-4 hover:text-crema">
+            Apri in mappa
+          </a>
+        </p>
+      </div>
+
+      <div class="py-6 sm:py-7 sm:pl-8">
+        <p class="eyebrow">Scrivici</p>
+        <p class="font-display mt-2.5 text-xl font-semibold break-all">
+          <a href={`mailto:${site.email}`} class="hover:text-ottone-chiaro transition-colors">{site.email}</a>
+        </p>
+        <p class="mt-1 text-sm text-crema/60">
+          <a href={site.social.instagram} target="_blank" rel="noopener" class="underline underline-offset-4 hover:text-crema">
+            {site.social.instagramHandle}
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <span class="sr-only">{indirizzoCompleto}</span>
+</aside>
+
+<script type="application/json" data-hours-json set:html={JSON.stringify(hoursInWeekOrder())} is:inline></script>
+
+<script>
+  interface Orario {
+    day: number;
+    label: string;
+    opens: string | null;
+    closes: string | null;
+    nota?: string;
+  }
+
+  const source = document.querySelector('[data-hours-json]');
+  const statusEl = document.querySelector('[data-hours-status]');
+  const detailEl = document.querySelector('[data-hours-detail]');
+
+  if (source?.textContent && statusEl && detailEl) {
+    const hours: Orario[] = JSON.parse(source.textContent);
+    const byDay = new Map(hours.map((h) => [h.day, h]));
+
+    /** Minutes since midnight. A closing time of "01:00" means 25:00. */
+    const toMinutes = (value: string) => {
+      const [h, m] = value.split(':').map(Number);
+      return h * 60 + m;
+    };
+
+    /*
+     * Read "now" in the venue's timezone rather than the visitor's, so someone
+     * checking from abroad still sees whether the circolo is open in Italy.
+     */
+    const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Europe/Rome',
+      weekday: 'short',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    }).formatToParts(new Date());
+
+    const get = (type: string) => parts.find((p) => p.type === type)?.value ?? '';
+    const weekdayIndex = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(get('weekday'));
+    // Intl can report "24" for midnight; normalise it back to 0.
+    const nowMinutes = (Number(get('hour')) % 24) * 60 + Number(get('minute'));
+
+    /** Closing time if the shift starting on `day` is still running at `minutes`. */
+    const closingIfOpen = (day: number, minutes: number) => {
+      const slot = byDay.get(day);
+      if (!slot?.opens || !slot.closes) return null;
+      const opens = toMinutes(slot.opens);
+      let closes = toMinutes(slot.closes);
+      if (closes <= opens) closes += 1440; // runs past midnight
+      return minutes >= opens && minutes < closes ? slot.closes : null;
+    };
+
+    const yesterday = (weekdayIndex + 6) % 7;
+    const closesAt = closingIfOpen(weekdayIndex, nowMinutes) ?? closingIfOpen(yesterday, nowMinutes + 1440);
+
+    if (closesAt) {
+      statusEl.innerHTML = `<span class="inline-flex items-center gap-2">
+        <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-ottone opacity-70"></span>
+          <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-ottone"></span>
+        </span>Siamo aperti ora</span>`;
+      detailEl.textContent = `Si chiude alle ${closesAt === '24:00' ? '00:00' : closesAt}`;
+    } else {
+      // Next day that has opening hours, starting from today.
+      let next: Orario | undefined;
+      let offset = 0;
+      for (let i = 0; i < 8; i += 1) {
+        const candidate = byDay.get((weekdayIndex + i) % 7);
+        if (candidate?.opens && !(i === 0 && nowMinutes >= toMinutes(candidate.opens))) {
+          next = candidate;
+          offset = i;
+          break;
+        }
+      }
+
+      statusEl.textContent = 'Ora siamo chiusi';
+      if (next) {
+        const quando = offset === 0 ? 'oggi' : offset === 1 ? 'domani' : next.label.toLowerCase();
+        detailEl.textContent = `Riapriamo ${quando} alle ${next.opens}${next.nota ? ` · ${next.nota.toLowerCase()}` : ''}`;
+      }
+    }
+  }
+</script>

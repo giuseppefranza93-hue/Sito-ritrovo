@@ -1,0 +1,94 @@
+---
+/**
+ * Where we are.
+ *
+ * No embedded Google map by design: an iframe from maps.google.com sets
+ * third-party cookies, which on an Italian site drags in a consent banner for
+ * one decorative panel. A styled card plus a direct link to Maps gives the
+ * visitor the same thing — directions — with none of that.
+ */
+import Section from './Section.astro';
+import Logo from './Logo.astro';
+import { site, indirizzoCompleto } from '../data/site';
+
+const indirizzoEncoded = encodeURIComponent(`${site.name}, ${indirizzoCompleto}`);
+const indicazioni = `https://www.google.com/maps/dir/?api=1&destination=${indirizzoEncoded}`;
+---
+
+<Section
+  id="dove-siamo"
+  eyebrow="Dove siamo"
+  titolo="Ci trovi a Valle Scuropasso"
+  intro="Siamo nell'Oltrepò Pavese, con parcheggio davanti. Apri le indicazioni e il navigatore fa il resto."
+>
+  <div class="mt-14 grid gap-5 lg:mt-16 lg:grid-cols-12">
+    <div class="bg-notte-raised border-notte-line rounded-card border p-8 lg:col-span-5 lg:p-10">
+      <Logo variante="marchio" fondo="scuro" class="h-16 w-16" />
+
+      <h3 class="font-display mt-6 text-2xl font-semibold">{site.name}</h3>
+      <p class="mt-3 leading-relaxed text-crema/70">
+        Un punto di incontro per serate di giochi da tavolo, carte collezionabili, tornei e momenti di community.
+      </p>
+
+      <address class="mt-8 space-y-3 text-base not-italic">
+        <p class="flex items-start gap-3">
+          <span class="text-ottone" aria-hidden="true">📍</span>
+          <span>{indirizzoCompleto}</span>
+        </p>
+        <p class="flex items-start gap-3">
+          <span class="text-ottone" aria-hidden="true">✉️</span>
+          <a href={`mailto:${site.email}`} class="break-all underline underline-offset-4 hover:text-ottone-chiaro">
+            {site.email}
+          </a>
+        </p>
+      </address>
+
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a
+          href={indicazioni}
+          target="_blank"
+          rel="noopener"
+          class="bg-ottone text-notte hover:bg-ottone-chiaro inline-flex rounded-full px-6 py-3.5 font-semibold transition-colors"
+        >
+          Portami al circolo
+        </a>
+        <a
+          href={site.mapsUrl}
+          target="_blank"
+          rel="noopener"
+          class="border-crema/25 hover:bg-crema/10 inline-flex rounded-full border px-6 py-3.5 font-semibold transition-colors"
+        >
+          Apri in Google Maps
+        </a>
+      </div>
+    </div>
+
+    <!-- Decorative stand-in for a map: brand-consistent, no third-party cookies. -->
+    <div class="border-notte-line relative min-h-[22rem] overflow-hidden rounded-card border lg:col-span-7">
+      <div class="from-notte-raised to-notte absolute inset-0 bg-gradient-to-br"></div>
+
+      <svg class="absolute inset-0 h-full w-full opacity-[0.18]" aria-hidden="true">
+        <defs>
+          <pattern id="griglia" width="56" height="56" patternUnits="userSpaceOnUse">
+            <path d="M56 0H0v56" fill="none" stroke="var(--color-ottone)" stroke-width="1"></path>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#griglia)"></rect>
+      </svg>
+
+      <div class="relative flex h-full flex-col items-center justify-center p-10 text-center">
+        <span class="relative flex h-5 w-5" aria-hidden="true">
+          <span class="bg-ottone absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"></span>
+          <span class="bg-ottone relative inline-flex h-5 w-5 rounded-full"></span>
+        </span>
+        <p class="font-display mt-6 text-2xl font-semibold">{site.address.street}</p>
+        <p class="mt-2 text-crema/60">
+          {site.address.postalCode} {site.address.city} ({site.address.province})
+        </p>
+        <a href={indicazioni} target="_blank" rel="noopener" class="text-ottone-chiaro mt-6 underline underline-offset-4">
+          Apri le indicazioni stradali
+        </a>
+      </div>
+    </div>
+  </div>
+</Section>

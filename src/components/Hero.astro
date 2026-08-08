@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets';
+import Logo from './Logo.astro';
+import { site } from '../data/site';
+import hero from '../images/hero.jpg';
+---
+
+<section id="home" class="relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden">
+  <Image
+    src={hero}
+    alt=""
+    widths={[720, 1280, 1920, 2400]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+    class="absolute inset-0 -z-20 h-full w-full object-cover"
+  />
+
+  <!-- Layered scrims: the logo is fine cream line art and needs a genuinely
+       dark, even ground underneath it to stay legible over any photo. -->
+  <div class="from-notte via-notte/85 to-notte/70 absolute inset-0 -z-10 bg-gradient-to-t"></div>
+  <div class="bg-notte/40 absolute inset-0 -z-10"></div>
+
+  <div class="container-page pt-28 pb-16">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow justify-center">Giochi da tavolo · Pokémon · Magic · GDR</p>
+
+      <!-- The wordmark carries the brand here; the h1 keeps real text for search
+           engines and screen readers. -->
+      <h1 class="sr-only">{site.name} — {site.tagline}</h1>
+      <Logo variante="completo" fondo="scuro" loading="eager" class="mx-auto mt-8 w-full max-w-xl" />
+
+      <p class="font-display mt-10 text-[clamp(1.6rem,4.2vw,2.6rem)] leading-[1.15] font-semibold text-crema">
+        {site.claim}
+      </p>
+
+      <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-crema/70">
+        {site.promessa} Atmosfera da gilda, energia da torneo e accoglienza da compagnia.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <a
+          href="#tessera"
+          class="bg-ottone text-notte hover:bg-ottone-chiaro inline-flex items-center rounded-full px-7 py-4 font-semibold shadow-lift-lg transition-colors"
+        >
+          Crea la tua tessera
+        </a>
+        <a
+          href="#eventi"
+          class="border-crema/30 hover:bg-crema/10 inline-flex items-center rounded-full border px-7 py-4 font-semibold transition-colors"
+        >
+          Guarda gli eventi
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- The numbers the client already advertises, pinned to the bottom of the hero. -->
+  <div class="border-notte-line/60 relative border-t">
+    <div class="container-page">
+      <dl class="divide-notte-line/60 grid divide-y sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        {
+          site.numeri.map((n) => (
+            <div class="flex items-baseline justify-center gap-3 py-5 sm:flex-col sm:items-center sm:gap-1 sm:py-7">
+              <dt class="font-display text-ottone text-3xl font-semibold sm:text-4xl">{n.valore}</dt>
+              <dd class="text-sm tracking-wide text-crema/65">{n.etichetta}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</section>

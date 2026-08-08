@@ -1,0 +1,33 @@
+---
+/**
+ * Single page, in the order the client's own site uses — with the gallery
+ * promoted to just after the intro, where it does the most work: showing a
+ * stranger what the room actually looks like before they read anything else.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import InfoStrip from '../components/InfoStrip.astro';
+import IlCircolo from '../components/IlCircolo.astro';
+import Carosello from '../components/Carosello.astro';
+import Ludoteca from '../components/Ludoteca.astro';
+import Eventi from '../components/Eventi.astro';
+import Tessera from '../components/Tessera.astro';
+import Prenotazioni from '../components/Prenotazioni.astro';
+import Community from '../components/Community.astro';
+import DoveSiamo from '../components/DoveSiamo.astro';
+import Contatti from '../components/Contatti.astro';
+---
+
+<BaseLayout>
+  <Hero />
+  <InfoStrip />
+  <IlCircolo />
+  <Carosello />
+  <Ludoteca />
+  <Eventi />
+  <Tessera />
+  <Prenotazioni />
+  <Community />
+  <DoveSiamo />
+  <Contatti />
+</BaseLayout>

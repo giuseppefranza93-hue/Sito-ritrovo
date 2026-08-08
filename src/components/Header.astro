@@ -1,0 +1,133 @@
+---
+import Logo from './Logo.astro';
+import { navigation } from '../data/site';
+---
+
+<header
+  class="fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-300"
+  data-header
+>
+  <div class="container-page">
+    <div class="flex h-20 items-center justify-between gap-6">
+      <!-- Hidden while the hero's large wordmark is on screen, so the logo is
+           never shown twice at once; it fades in as soon as the page scrolls. -->
+      <a
+        href="#home"
+        data-header-logo
+        class="shrink-0 opacity-0 transition-opacity duration-300"
+        aria-label="Il Ritrovo della Compagnia — torna all'inizio"
+      >
+        <Logo variante="completo" fondo="scuro" loading="eager" class="h-11 w-auto sm:h-12" />
+      </a>
+
+      <nav aria-label="Principale" class="hidden lg:block">
+        <ul class="flex items-center gap-7">
+          {
+            navigation.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="hover:text-ottone-chiaro relative text-sm font-medium tracking-wide transition-colors after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-0 after:bg-current after:transition-[width] after:duration-300 hover:after:w-full"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a
+          href="#tessera"
+          class="bg-ottone text-notte hover:bg-ottone-chiaro hidden rounded-full px-5 py-2.5 text-sm font-semibold shadow-lift transition-colors sm:inline-flex"
+        >
+          Crea la tua tessera
+        </a>
+
+        <button
+          type="button"
+          data-menu-toggle
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+          class="border-crema/25 hover:border-crema/50 inline-flex h-11 w-11 items-center justify-center rounded-full border transition-colors lg:hidden"
+        >
+          <span class="sr-only">Apri il menu</span>
+          <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true">
+            <path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="mobile-nav" hidden class="bg-notte-raised border-notte-line border-t lg:hidden">
+    <nav aria-label="Principale (mobile)" class="container-page py-6">
+      <ul class="flex flex-col gap-1">
+        {
+          navigation.map((item) => (
+            <li>
+              <a href={item.href} data-mobile-link class="font-display block py-3 text-2xl font-semibold">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a
+        href="#tessera"
+        data-mobile-link
+        class="bg-ottone text-notte mt-6 flex w-full items-center justify-center rounded-full px-5 py-3.5 font-semibold"
+      >
+        Crea la tua tessera
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const panel = document.getElementById('mobile-nav');
+
+  /*
+   * The header stays transparent over the hero and only takes a background
+   * once the page scrolls, so it never competes with the logo in the hero.
+   */
+  const headerLogo = document.querySelector<HTMLElement>('[data-header-logo]');
+
+  if (header) {
+    const applyScrollState = () => {
+      const scrolled = window.scrollY > 24;
+      header.classList.toggle('bg-notte/90', scrolled);
+      header.classList.toggle('backdrop-blur-md', scrolled);
+      header.classList.toggle('shadow-lift', scrolled);
+
+      if (headerLogo) {
+        headerLogo.classList.toggle('opacity-0', !scrolled);
+        // Keep it out of the tab order while it is invisible.
+        headerLogo.tabIndex = scrolled ? 0 : -1;
+        headerLogo.setAttribute('aria-hidden', String(!scrolled));
+      }
+    };
+    applyScrollState();
+    window.addEventListener('scroll', applyScrollState, { passive: true });
+  }
+
+  if (toggle && panel) {
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      panel.hidden = !open;
+      document.documentElement.style.overflow = open ? 'hidden' : '';
+    };
+
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    panel.querySelectorAll('[data-mobile-link]').forEach((link) => link.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+  }
+</script>

@@ -1,0 +1,241 @@
+---
+/**
+ * The public game catalogue, rebuilt from the client's own library.
+ *
+ * This sits on parchment rather than the dark ground: it is the densest
+ * reading on the page, and 80 rows of small text on a dark surface is where a
+ * nocturnal design stops being atmospheric and starts being tiring.
+ *
+ * Filtering is plain client-side JS over rendered cards. With 80 items there is
+ * nothing to gain from a framework, and it keeps working as static HTML.
+ */
+import { Image } from 'astro:assets';
+import Section from './Section.astro';
+import giochi from '../data/giochi.json';
+import ludoteca from '../images/ludoteca.jpg';
+
+const difficoltaStile: Record<string, string> = {
+  facile: 'bg-[#1e4b3a]/12 text-[#1e4b3a]',
+  media: 'bg-[#c9982f]/22 text-[#7a5c12]',
+  alta: 'bg-[#a8503a]/14 text-[#8d3a26]',
+};
+
+const conteggi = {
+  totale: giochi.length,
+  facile: giochi.filter((g) => g.difficolta === 'facile').length,
+};
+
+/**
+ * How many cards are rendered visible before "mostra tutti". Collapsing this
+ * server-side avoids an 80-card list flashing in and then folding up once the
+ * script runs. The <noscript> rule below restores the full list when there is
+ * no JavaScript to expand it.
+ */
+const ANTEPRIMA = 12;
+---
+
+<Section
+  id="ludoteca"
+  eyebrow="Ludoteca"
+  titolo={`${conteggi.totale} giochi, tutti da provare`}
+  intro="Il catalogo pubblico del circolo: numero di giocatori, durata e difficoltà. Sono tutti disponibili subito — non serve prenotare il titolo, basta chiederlo al banco."
+  tone="pergamena"
+>
+  <div class="mt-12 grid gap-10 lg:mt-14 lg:grid-cols-12 lg:gap-12">
+    <div class="lg:col-span-4 lg:sticky lg:top-28 lg:self-start">
+      <Image
+        src={ludoteca}
+        alt="La ludoteca del circolo"
+        widths={[420, 768, 1400]}
+        sizes="(min-width: 1024px) 32vw, 100vw"
+        class="aspect-[4/3] w-full rounded-card object-cover shadow-lift"
+      />
+
+      <div class="border-inchiostro/15 mt-8 border-t pt-7">
+        <p class="text-inchiostro-soft leading-relaxed">
+          Non sai cosa scegliere? Dicci in quanti siete e quanto tempo avete: ti portiamo due o tre proposte al tavolo
+          e ti spieghiamo le regole.
+        </p>
+        <p class="text-inchiostro-soft mt-4 leading-relaxed">
+          {conteggi.facile} titoli su {conteggi.totale} sono adatti a chi non ha mai giocato.
+        </p>
+        <a href="#prenotazioni" class="text-rame mt-5 inline-flex font-semibold underline underline-offset-4">
+          Prenota un tavolo con il gioco che vuoi
+        </a>
+      </div>
+    </div>
+
+    <div class="lg:col-span-8">
+      <!-- Filters mirror the ones the client already offers on their site. -->
+      <div class="border-inchiostro/15 bg-pergamena-sunk/60 grid gap-4 rounded-card border p-5 sm:grid-cols-3">
+        <div>
+          <label for="filtro-cerca" class="text-inchiostro-soft block text-xs font-semibold tracking-wider uppercase">
+            Cerca
+          </label>
+          <input
+            id="filtro-cerca"
+            type="search"
+            placeholder="Titolo del gioco"
+            autocomplete="off"
+            class="border-inchiostro/20 focus:border-rame bg-pergamena mt-2 w-full rounded-lg border px-3 py-2.5 text-inchiostro outline-none"
+          />
+        </div>
+
+        <div>
+          <label for="filtro-giocatori" class="text-inchiostro-soft block text-xs font-semibold tracking-wider uppercase">
+            Giocatori
+          </label>
+          <select
+            id="filtro-giocatori"
+            class="border-inchiostro/20 focus:border-rame bg-pergamena mt-2 w-full rounded-lg border px-3 py-2.5 text-inchiostro outline-none"
+          >
+            <option value="">Tutti i giocatori</option>
+            {[1, 2, 3, 4, 5, 6, 8].map((n) => <option value={n}>{n === 8 ? '8 o più' : `${n} giocator${n === 1 ? 'e' : 'i'}`}</option>)}
+          </select>
+        </div>
+
+        <div>
+          <label for="filtro-difficolta" class="text-inchiostro-soft block text-xs font-semibold tracking-wider uppercase">
+            Difficoltà
+          </label>
+          <select
+            id="filtro-difficolta"
+            class="border-inchiostro/20 focus:border-rame bg-pergamena mt-2 w-full rounded-lg border px-3 py-2.5 text-inchiostro outline-none"
+          >
+            <option value="">Tutte le difficoltà</option>
+            <option value="facile">Facile</option>
+            <option value="media">Media</option>
+            <option value="alta">Alta</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="text-inchiostro-soft mt-5 text-sm" data-ludoteca-conteggio aria-live="polite">
+        {conteggi.totale} giochi in catalogo
+      </p>
+
+      <ul class="mt-4 grid gap-3 sm:grid-cols-2" data-ludoteca-lista>
+        {
+          giochi.map((gioco, index) => (
+            <li
+              class="border-inchiostro/12 bg-pergamena flex flex-col rounded-card border p-4 transition-shadow hover:shadow-lift"
+              hidden={index >= ANTEPRIMA}
+              data-gioco
+              data-titolo={gioco.titolo.toLowerCase()}
+              data-min={gioco.giocatoriMin}
+              data-max={gioco.giocatoriMax}
+              data-difficolta={gioco.difficolta}
+            >
+              <div class="flex items-start justify-between gap-3">
+                <h3 class="font-display text-lg leading-tight font-semibold">{gioco.titolo}</h3>
+                <span
+                  class:list={['shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold', difficoltaStile[gioco.difficolta]]}
+                >
+                  {gioco.difficolta}
+                </span>
+              </div>
+              <p class="text-inchiostro-soft mt-2.5 flex flex-wrap gap-x-3 gap-y-1 text-sm tabular-nums">
+                <span>{gioco.giocatori} giocatori</span>
+                <span aria-hidden="true">·</span>
+                <span>{gioco.durata}</span>
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <noscript>
+        <style>
+          /* Without JS there is no way to expand the list, so show it all. */
+          [data-gioco][hidden] {
+            display: flex !important;
+          }
+          [data-ludoteca-altro-contenitore] {
+            display: none !important;
+          }
+        </style>
+      </noscript>
+
+      <!-- Only a first page is shown by default: 80 cards unrolled makes the
+           whole page feel like a spreadsheet. Filtering reveals every match. -->
+      <div class="mt-6 flex justify-center" data-ludoteca-altro-contenitore>
+        <button
+          type="button"
+          data-ludoteca-altro
+          class="border-inchiostro/25 hover:bg-inchiostro/5 rounded-full border px-6 py-3 font-semibold transition-colors"
+        >
+          Mostra tutti i {conteggi.totale} giochi
+        </button>
+      </div>
+
+      <p class="text-inchiostro-soft mt-6 hidden text-center" data-ludoteca-vuoto>
+        Nessun gioco corrisponde ai filtri. Prova ad allargare la ricerca — oppure chiedi a noi, il catalogo cresce di
+        continuo.
+      </p>
+    </div>
+  </div>
+</Section>
+
+<script>
+  const lista = document.querySelector<HTMLElement>('[data-ludoteca-lista]');
+  const cerca = document.querySelector<HTMLInputElement>('#filtro-cerca');
+  const giocatori = document.querySelector<HTMLSelectElement>('#filtro-giocatori');
+  const difficolta = document.querySelector<HTMLSelectElement>('#filtro-difficolta');
+  const conteggio = document.querySelector<HTMLElement>('[data-ludoteca-conteggio]');
+  const vuoto = document.querySelector<HTMLElement>('[data-ludoteca-vuoto]');
+
+  const bottoneAltro = document.querySelector<HTMLButtonElement>('[data-ludoteca-altro]');
+  const contenitoreAltro = document.querySelector<HTMLElement>('[data-ludoteca-altro-contenitore]');
+
+  if (lista && cerca && giocatori && difficolta && conteggio && vuoto) {
+    const schede = Array.from(lista.querySelectorAll<HTMLElement>('[data-gioco]'));
+    const ANTEPRIMA = 12;
+
+    let mostraTutti = false;
+
+    const applica = () => {
+      const testo = cerca.value.trim().toLowerCase();
+      const numero = giocatori.value ? Number(giocatori.value) : null;
+      const livello = difficolta.value;
+      const filtrando = Boolean(testo || numero || livello);
+
+      let corrispondenti = 0;
+
+      for (const scheda of schede) {
+        const min = Number(scheda.dataset.min);
+        const max = Number(scheda.dataset.max);
+        // "8 o più" means any game whose table can seat at least eight.
+        const okGiocatori = numero === null || (numero === 8 ? max >= 8 : numero >= min && numero <= max);
+        const okDifficolta = !livello || scheda.dataset.difficolta === livello;
+        const okTesto = !testo || (scheda.dataset.titolo ?? '').includes(testo);
+        const corrisponde = okGiocatori && okDifficolta && okTesto;
+
+        if (corrisponde) corrispondenti += 1;
+
+        // While filtering, every match is shown; otherwise only the first page.
+        const oltreAnteprima = !filtrando && !mostraTutti && corrispondenti > ANTEPRIMA;
+        scheda.hidden = !corrisponde || oltreAnteprima;
+      }
+
+      conteggio.textContent =
+        corrispondenti === schede.length
+          ? `${corrispondenti} giochi in catalogo`
+          : `${corrispondenti} giochi su ${schede.length}`;
+      vuoto.classList.toggle('hidden', corrispondenti > 0);
+
+      // The button is only meaningful on the unfiltered, collapsed list.
+      contenitoreAltro?.classList.toggle('hidden', filtrando || mostraTutti || corrispondenti <= ANTEPRIMA);
+    };
+
+    bottoneAltro?.addEventListener('click', () => {
+      mostraTutti = true;
+      applica();
+    });
+
+    cerca.addEventListener('input', applica);
+    giocatori.addEventListener('change', applica);
+    difficolta.addEventListener('change', applica);
+
+    applica();
+  }
+</script>

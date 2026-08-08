@@ -1,0 +1,140 @@
+/*
+ * Il Ritrovo della Compagnia — design system
+ *
+ * The palette is taken from the client's own logo rather than invented: the
+ * wordmark is cream line art (#fff1d6 sampled straight from the PNG) drawn for
+ * a dark ground — a crescent moon and a sword. So the brand is nocturnal, and
+ * the site is built dark to let the logo sit on its intended background.
+ *
+ * The risk with a dark site in this category is looking like a gamer cave and
+ * scaring off casual visitors — the mistake Mox Boarding House publicly
+ * rebuilt their own site to fix. Two things keep it approachable here: the
+ * ground is a warm green-black rather than pure black, and the dense reading
+ * sections (ludoteca, tessera, orari) sit on parchment instead of dark.
+ */
+
+@import 'tailwindcss';
+
+@import '@fontsource-variable/fraunces/full.css';
+@import '@fontsource-variable/inter/index.css';
+
+@theme {
+  /* Night — the primary brand ground, green-black and warm, never pure black. */
+  --color-notte: #0e1f17;
+  --color-notte-raised: #142a20;
+  --color-notte-soft: #1c3a2c;
+  --color-notte-line: #27503d;
+
+  /* Cream — sampled from the logo artwork. */
+  --color-crema: #fff1d6;
+
+  /* Parchment — the light counterweight for dense reading sections. */
+  --color-pergamena: #f6ead2;
+  --color-pergamena-sunk: #ecdcbd;
+  --color-inchiostro: #14241b;
+  --color-inchiostro-soft: #4a5a4e;
+
+  /* Candlelight accents. */
+  --color-ottone: #c9982f;
+  --color-ottone-chiaro: #e5c887;
+  --color-rame: #a8503a;
+
+  --font-display: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --radius-card: 0.875rem;
+
+  --shadow-lift: 0 1px 2px rgb(0 0 0 / 0.2), 0 12px 32px -16px rgb(0 0 0 / 0.55);
+  --shadow-lift-lg: 0 2px 6px rgb(0 0 0 / 0.25), 0 32px 64px -28px rgb(0 0 0 / 0.7);
+
+  --spacing-section: 5rem;
+  --spacing-section-lg: 7.5rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Keeps anchor targets clear of the fixed header. */
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+    background-color: var(--color-notte);
+  }
+
+  body {
+    background-color: var(--color-notte);
+    color: var(--color-crema);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  /*
+   * Fraunces has SOFT and WONK axes beyond weight. Turning them up gives the
+   * headings a hand-cut warmth that echoes the art-nouveau lettering in the
+   * logo; the default axis values render as an ordinary serif and clash with it.
+   */
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    font-variation-settings:
+      'SOFT' 50,
+      'WONK' 1,
+      'opsz' 120;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ottone);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-ottone);
+    color: var(--color-notte);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility container-page {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 2rem;
+  }
+}
+
+/* Small-caps label sitting above every section heading. */
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-ottone);
+}

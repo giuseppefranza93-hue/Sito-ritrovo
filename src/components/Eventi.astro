@@ -1,0 +1,115 @@
+---
+/**
+ * Events. Recurring nights are shown by their recurrence ("Ogni mercoledì")
+ * rather than a date, so they never look stale; one-off events show the date
+ * and drop off the page once they have passed.
+ */
+import { getCollection, render } from 'astro:content';
+import Section from './Section.astro';
+
+const oggi = new Date();
+oggi.setHours(0, 0, 0, 0);
+
+const tutti = await getCollection('eventi');
+
+/** Rendering the Markdown body up front keeps the template free of promises. */
+const conContenuto = await Promise.all(
+  tutti.map(async (evento) => ({ ...evento, Content: (await render(evento)).Content })),
+);
+
+const ricorrenti = conContenuto
+  .filter((e) => e.data.ricorrenza)
+  .sort((a, b) => a.data.data.getTime() - b.data.data.getTime());
+
+const singoli = conContenuto
+  .filter((e) => !e.data.ricorrenza && e.data.data >= oggi)
+  .sort((a, b) => a.data.data.getTime() - b.data.data.getTime());
+
+const formatoData = new Intl.DateTimeFormat('it-IT', { day: 'numeric', month: 'long', timeZone: 'Europe/Rome' });
+const formatoGiorno = new Intl.DateTimeFormat('it-IT', { weekday: 'long', timeZone: 'Europe/Rome' });
+const formatoMese = new Intl.DateTimeFormat('it-IT', { month: 'short', timeZone: 'Europe/Rome' });
+---
+
+<Section
+  id="eventi"
+  eyebrow="Eventi"
+  titolo="Serate fisse, tornei e appuntamenti speciali"
+  intro="Tre serate fisse ogni settimana, più gli eventi speciali. Per le serate fisse non serve prenotare: si arriva e si gioca."
+  tone="notte-raised"
+>
+  {
+    singoli.length > 0 && (
+      <div class="mt-14 lg:mt-16">
+        <h3 class="text-sm font-semibold tracking-[0.18em] text-crema/50 uppercase">In arrivo</h3>
+
+        <ul class="mt-6 grid gap-5 lg:grid-cols-2">
+          {singoli.map((evento) => (
+            <li class="bg-notte border-ottone/35 rounded-card border p-7">
+              <div class="flex items-start gap-6">
+                <div class="border-ottone/40 shrink-0 rounded-lg border px-4 py-3 text-center">
+                  <span class="font-display text-ottone block text-3xl leading-none font-semibold tabular-nums">
+                    {evento.data.data.getDate()}
+                  </span>
+                  <span class="mt-1 block text-xs tracking-widest text-crema/60 uppercase">
+                    {formatoMese.format(evento.data.data).replace('.', '')}
+                  </span>
+                </div>
+
+                <div class="min-w-0">
+                  <p class="eyebrow">{evento.data.categoria}</p>
+                  <h4 class="font-display mt-2 text-2xl font-semibold">{evento.data.titolo}</h4>
+                  <p class="mt-1 text-sm text-crema/60">
+                    {formatoGiorno.format(evento.data.data)} {formatoData.format(evento.data.data)} · ore{' '}
+                    {evento.data.oraInizio}
+                  </p>
+
+                  <div class="mt-4 leading-relaxed text-crema/75">
+                    <evento.Content />
+                  </div>
+
+                  <p class="mt-5 text-sm text-crema/55">
+                    {evento.data.posti === 'illimitati' ? 'Posti illimitati' : `${evento.data.posti} posti`}
+                    {evento.data.prenotazioneRichiesta ? ' · prenotazione richiesta' : ' · ingresso libero'}
+                  </p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  <div class="mt-14 lg:mt-16">
+    <h3 class="text-sm font-semibold tracking-[0.18em] text-crema/50 uppercase">Ogni settimana</h3>
+
+    <ul class="mt-6 grid gap-px overflow-hidden rounded-card bg-notte-line md:grid-cols-3">
+      {
+        ricorrenti.map((evento) => (
+          <li class="bg-notte flex flex-col p-7">
+            <p class="eyebrow">{evento.data.categoria}</p>
+            <h4 class="font-display mt-2 text-2xl font-semibold">{evento.data.titolo}</h4>
+            <p class="text-ottone-chiaro mt-1 text-sm font-medium">
+              {evento.data.ricorrenza} · dalle {evento.data.oraInizio}
+            </p>
+            <div class="mt-4 leading-relaxed text-crema/70">
+              <evento.Content />
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <p class="mt-10 text-sm text-crema/55">
+    Il calendario completo e le foto delle serate sono su{' '}
+    <a
+      href="https://www.instagram.com/ilritrovodellacompagnia/"
+      target="_blank"
+      rel="noopener"
+      class="text-ottone-chiaro underline underline-offset-4"
+    >
+      Instagram
+    </a>.
+  </p>
+</Section>

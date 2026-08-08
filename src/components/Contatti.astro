@@ -1,0 +1,146 @@
+---
+/**
+ * Contact.
+ *
+ * The form only renders when site.formEndpoint is configured. Until then the
+ * section shows the email and Instagram cards instead — a form that posts into
+ * the void is worse than no form, because the visitor believes they wrote to you.
+ */
+import Section from './Section.astro';
+import { site } from '../data/site';
+
+const formAttivo = site.formEndpoint.length > 0;
+---
+
+<Section
+  id="contatti"
+  eyebrow="Contatti"
+  titolo="Pronto per una serata al Ritrovo?"
+  intro="Scrivici per informazioni, per prenotare un tavolo o per organizzare un evento. Rispondiamo di solito in giornata."
+  tone="pergamena"
+>
+  <div class="mt-12 grid gap-5 lg:mt-14 lg:grid-cols-12">
+    <div class="lg:col-span-5">
+      <a
+        href={`mailto:${site.email}`}
+        class="border-inchiostro/15 hover:border-rame/50 block rounded-card border p-7 transition-colors"
+      >
+        <p class="eyebrow">Email</p>
+        <p class="font-display mt-3 text-xl font-semibold break-all">{site.email}</p>
+        <p class="text-inchiostro-soft mt-2 text-sm">Per informazioni, gruppi ed eventi privati</p>
+      </a>
+
+      <a
+        href={site.social.instagram}
+        target="_blank"
+        rel="noopener"
+        class="border-inchiostro/15 hover:border-rame/50 mt-5 block rounded-card border p-7 transition-colors"
+      >
+        <p class="eyebrow">Instagram</p>
+        <p class="font-display mt-3 text-xl font-semibold">{site.social.instagramHandle}</p>
+        <p class="text-inchiostro-soft mt-2 text-sm">Foto delle serate, eventi e risposte veloci in DM</p>
+      </a>
+
+      <div class="border-inchiostro/15 mt-5 rounded-card border p-7">
+        <p class="eyebrow">Vuoi diventare socio?</p>
+        <p class="text-inchiostro-soft mt-3 leading-relaxed">
+          La tessera si fa online e vale per tutto l'anno associativo.
+        </p>
+        <a
+          href="#tessera"
+          class="bg-rame text-pergamena mt-5 inline-flex rounded-full px-6 py-3 font-semibold transition-colors hover:bg-[#8d3a26]"
+        >
+          Crea la tua tessera
+        </a>
+      </div>
+    </div>
+
+    <div class="lg:col-span-7">
+      {
+        formAttivo ? (
+          <form
+            action={site.formEndpoint}
+            method="POST"
+            class="border-inchiostro/15 bg-pergamena-sunk/40 rounded-card border p-7 sm:p-9"
+          >
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for="nome" class="text-inchiostro-soft block text-sm font-semibold">
+                  Nome
+                </label>
+                <input
+                  id="nome"
+                  name="nome"
+                  type="text"
+                  required
+                  autocomplete="name"
+                  class="border-inchiostro/20 focus:border-rame bg-pergamena mt-2 w-full rounded-lg border px-4 py-3 outline-none"
+                />
+              </div>
+              <div>
+                <label for="email" class="text-inchiostro-soft block text-sm font-semibold">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  autocomplete="email"
+                  class="border-inchiostro/20 focus:border-rame bg-pergamena mt-2 w-full rounded-lg border px-4 py-3 outline-none"
+                />
+              </div>
+            </div>
+
+            <div class="mt-5">
+              <label for="oggetto" class="text-inchiostro-soft block text-sm font-semibold">
+                Oggetto
+              </label>
+              <input
+                id="oggetto"
+                name="oggetto"
+                type="text"
+                class="border-inchiostro/20 focus:border-rame bg-pergamena mt-2 w-full rounded-lg border px-4 py-3 outline-none"
+              />
+            </div>
+
+            <div class="mt-5">
+              <label for="messaggio" class="text-inchiostro-soft block text-sm font-semibold">
+                Messaggio
+              </label>
+              <textarea
+                id="messaggio"
+                name="messaggio"
+                rows="5"
+                required
+                class="border-inchiostro/20 focus:border-rame bg-pergamena mt-2 w-full rounded-lg border px-4 py-3 outline-none"
+              />
+            </div>
+
+            <button
+              type="submit"
+              class="bg-rame text-pergamena mt-7 inline-flex rounded-full px-7 py-3.5 font-semibold transition-colors hover:bg-[#8d3a26]"
+            >
+              Invia richiesta
+            </button>
+          </form>
+        ) : (
+          <div class="border-inchiostro/15 bg-pergamena-sunk/40 flex h-full flex-col justify-center rounded-card border p-8 sm:p-10">
+            <h3 class="font-display text-2xl font-semibold">Scrivici due righe</h3>
+            <p class="text-inchiostro-soft mt-4 leading-relaxed">
+              Dicci chi sei, quando vorresti venire e in quante persone siete. Se hai in mente un gioco preciso o un
+              evento da organizzare, scrivilo pure: ti rispondiamo con una proposta.
+            </p>
+            <a
+              href={`mailto:${site.email}?subject=${encodeURIComponent('Informazioni Il Ritrovo della Compagnia')}`}
+              class="bg-rame text-pergamena mt-8 inline-flex w-fit rounded-full px-7 py-3.5 font-semibold transition-colors hover:bg-[#8d3a26]"
+            >
+              Scrivi una email
+            </a>
+            {/* Per attivare il modulo: valorizzare site.formEndpoint (vedi README). */}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</Section>

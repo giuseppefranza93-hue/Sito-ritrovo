@@ -1,0 +1,37 @@
+---
+/**
+ * The client's own logo, used as supplied.
+ *
+ * Two artworks exist and they are not interchangeable:
+ * - logo-ritrovo-light.png — the full cream wordmark, drawn for dark grounds.
+ * - logo-semplificato.png  — the moon-and-sword mark in black, for light grounds.
+ *   logo-semplificato-crema.png is the same mark recoloured to the brand cream.
+ */
+interface Props {
+  /** 'completo' is the wordmark; 'marchio' is the moon-and-sword symbol alone. */
+  variante?: 'completo' | 'marchio';
+  /** The surface it sits on, which decides cream vs black artwork. */
+  fondo?: 'scuro' | 'chiaro';
+  class?: string;
+  loading?: 'eager' | 'lazy';
+}
+
+const { variante = 'completo', fondo = 'scuro', class: className = '', loading = 'lazy' } = Astro.props;
+
+const sorgenti = {
+  completo: { scuro: '/logo/logo-ritrovo-light.png', chiaro: '/logo/logo-ritrovo-light.png' },
+  marchio: { scuro: '/logo/logo-semplificato-crema.png', chiaro: '/logo/logo-semplificato.png' },
+} as const;
+
+const dimensioni = variante === 'completo' ? { width: 900, height: 580 } : { width: 500, height: 500 };
+---
+
+<img
+  src={sorgenti[variante][fondo]}
+  alt="Il Ritrovo della Compagnia"
+  width={dimensioni.width}
+  height={dimensioni.height}
+  loading={loading}
+  decoding="async"
+  class={className}
+/>

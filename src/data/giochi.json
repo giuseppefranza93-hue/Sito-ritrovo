@@ -1,0 +1,722 @@
+[
+  {
+    "titolo": "7 Wonders Duel",
+    "giocatoriMin": 2,
+    "giocatoriMax": 2,
+    "giocatori": "2",
+    "durata": "30 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Annunaki – Dawn of Gods",
+    "giocatoriMin": 2,
+    "giocatoriMax": 5,
+    "giocatori": "2–5",
+    "durata": "90–120 min",
+    "difficolta": "alta",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Attack of Jelly Monster",
+    "giocatoriMin": 2,
+    "giocatoriMax": 5,
+    "giocatori": "2–5",
+    "durata": "20–40 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Bathroom Rush",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "15–30 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Bongo Tongo",
+    "giocatoriMin": 2,
+    "giocatoriMax": 5,
+    "giocatori": "2–5",
+    "durata": "15–25 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Camel Cup + espansione",
+    "giocatoriMin": 3,
+    "giocatoriMax": 8,
+    "giocatori": "3–8",
+    "durata": "20–30 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Carcassonne",
+    "giocatoriMin": 2,
+    "giocatoriMax": 5,
+    "giocatori": "2–5",
+    "durata": "35–60 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Cartagena",
+    "giocatoriMin": 2,
+    "giocatoriMax": 5,
+    "giocatori": "2–5",
+    "durata": "30–45 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Cluedo",
+    "giocatoriMin": 2,
+    "giocatoriMax": 6,
+    "giocatori": "2–6",
+    "durata": "45–75 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Cortex 2 Challenge",
+    "giocatoriMin": 2,
+    "giocatoriMax": 6,
+    "giocatori": "2–6",
+    "durata": "15–30 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Cranium",
+    "giocatoriMin": 4,
+    "giocatoriMax": 16,
+    "giocatori": "4–16",
+    "durata": "60–90 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Dibattito",
+    "giocatoriMin": 2,
+    "giocatoriMax": 8,
+    "giocatori": "2–8",
+    "durata": "30–60 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Dice Forge",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "40–60 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Dig Your Way Out + espansione",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "60–90 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Disco Draw",
+    "giocatoriMin": 2,
+    "giocatoriMax": 8,
+    "giocatori": "2–8",
+    "durata": "20–40 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "DracoMago",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "20–40 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Duplik",
+    "giocatoriMin": 2,
+    "giocatoriMax": 8,
+    "giocatori": "2–8",
+    "durata": "30–45 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Fallout (boardgame)",
+    "giocatoriMin": 1,
+    "giocatoriMax": 4,
+    "giocatori": "1–4",
+    "durata": "120–180 min",
+    "difficolta": "alta",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Fallout Shelter",
+    "giocatoriMin": 1,
+    "giocatoriMax": 4,
+    "giocatori": "1–4",
+    "durata": "60–90 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Flick of Fate",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "20–40 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Growers",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "30–60 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Harry Potter – Diagon Alley",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "60–90 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Hellapagos",
+    "giocatoriMin": 3,
+    "giocatoriMax": 12,
+    "giocatori": "3–12",
+    "durata": "30–45 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Heroes for Rent",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "45–90 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Il Signore degli Anelli",
+    "giocatoriMin": 2,
+    "giocatoriMax": 5,
+    "giocatori": "2–5",
+    "durata": "60–120 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Illuminati",
+    "giocatoriMin": 2,
+    "giocatoriMax": 8,
+    "giocatori": "2–8",
+    "durata": "60–120 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Imagine",
+    "giocatoriMin": 2,
+    "giocatoriMax": 8,
+    "giocatori": "2–8",
+    "durata": "30 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "In Alto i Calici",
+    "giocatoriMin": 2,
+    "giocatoriMax": 6,
+    "giocatori": "2–6",
+    "durata": "20–40 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Keyforge (3 mazzi)",
+    "giocatoriMin": 2,
+    "giocatoriMax": 2,
+    "giocatori": "2",
+    "durata": "45–75 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Kill the Unicorns",
+    "giocatoriMin": 2,
+    "giocatoriMax": 5,
+    "giocatori": "2–5",
+    "durata": "30–45 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "King of Tokyo",
+    "giocatoriMin": 2,
+    "giocatoriMax": 6,
+    "giocatori": "2–6",
+    "durata": "30–45 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Labirinto Magico",
+    "giocatoriMin": 1,
+    "giocatoriMax": 4,
+    "giocatori": "1–4",
+    "durata": "20–40 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Last Bastion",
+    "giocatoriMin": 1,
+    "giocatoriMax": 4,
+    "giocatori": "1–4",
+    "durata": "60–90 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Le Leggende di Andor",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "60–90 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Le Rovine Perdute di Arnak",
+    "giocatoriMin": 1,
+    "giocatoriMax": 4,
+    "giocatori": "1–4",
+    "durata": "30–120 min",
+    "difficolta": "alta",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Lupus in Tabula",
+    "giocatoriMin": 8,
+    "giocatoriMax": 18,
+    "giocatori": "8–18",
+    "durata": "20–40 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Magic Maze",
+    "giocatoriMin": 1,
+    "giocatoriMax": 8,
+    "giocatori": "1–8",
+    "durata": "15–30 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Marvel D.A.G.G.E.R.",
+    "giocatoriMin": 1,
+    "giocatoriMax": 5,
+    "giocatori": "1–5",
+    "durata": "60–120 min",
+    "difficolta": "alta",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Mech vs Minion",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "60–120 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Minecraft Builders & Biomes",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "30–60 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Monopoli",
+    "giocatoriMin": 2,
+    "giocatoriMax": 6,
+    "giocatori": "2–6",
+    "durata": "90–180 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Munchkin Base + 2/3",
+    "giocatoriMin": 3,
+    "giocatoriMax": 6,
+    "giocatori": "3–6",
+    "durata": "60–120 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Munchkin Cthulhu",
+    "giocatoriMin": 3,
+    "giocatoriMax": 6,
+    "giocatori": "3–6",
+    "durata": "60–120 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Munchkin Oz",
+    "giocatoriMin": 3,
+    "giocatoriMax": 6,
+    "giocatori": "3–6",
+    "durata": "60–120 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Nemesis",
+    "giocatoriMin": 1,
+    "giocatoriMax": 5,
+    "giocatori": "1–5",
+    "durata": "90–180 min",
+    "difficolta": "alta",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Otto minuti per un impero",
+    "giocatoriMin": 2,
+    "giocatoriMax": 5,
+    "giocatori": "2–5",
+    "durata": "10–30 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Pandemic",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "45–60 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Pixel Tactics Legends",
+    "giocatoriMin": 2,
+    "giocatoriMax": 2,
+    "giocatori": "2",
+    "durata": "45–60 min",
+    "difficolta": "alta",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Pokémon Master Trainer",
+    "giocatoriMin": 2,
+    "giocatoriMax": 6,
+    "giocatori": "2–6",
+    "durata": "60–120 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Rapigrama",
+    "giocatoriMin": 2,
+    "giocatoriMax": 8,
+    "giocatori": "2–8",
+    "durata": "20–40 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Rick e Morty – Anatomy Park",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "60–90 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Rick e Morty – Pickle Rick",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "60–90 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Rick e Morty – Total Rickall",
+    "giocatoriMin": 2,
+    "giocatoriMax": 5,
+    "giocatori": "2–5",
+    "durata": "30–45 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Risikard",
+    "giocatoriMin": 2,
+    "giocatoriMax": 6,
+    "giocatori": "2–6",
+    "durata": "30–60 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Rush & Bash",
+    "giocatoriMin": 2,
+    "giocatoriMax": 6,
+    "giocatori": "2–6",
+    "durata": "30–60 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Saboteur",
+    "giocatoriMin": 3,
+    "giocatoriMax": 10,
+    "giocatori": "3–10",
+    "durata": "30–45 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Samurai Sword + espansione",
+    "giocatoriMin": 3,
+    "giocatoriMax": 8,
+    "giocatori": "3–8",
+    "durata": "45–60 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Santorini",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "20 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Scacchi magnetici",
+    "giocatoriMin": 2,
+    "giocatoriMax": 2,
+    "giocatori": "2",
+    "durata": "30–90 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Scarabeo",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "60–120 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Seasons",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "60–90 min",
+    "difficolta": "alta",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Seconda Chance",
+    "giocatoriMin": 1,
+    "giocatoriMax": 6,
+    "giocatori": "1–6",
+    "durata": "20–30 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Set e Match",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "20–40 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Shit Happens +18",
+    "giocatoriMin": 2,
+    "giocatoriMax": 10,
+    "giocatori": "2–10",
+    "durata": "20–40 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Similo Harry Potter",
+    "giocatoriMin": 2,
+    "giocatoriMax": 8,
+    "giocatori": "2–8",
+    "durata": "15–20 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Squillo (1+2+3)",
+    "giocatoriMin": 2,
+    "giocatoriMax": 6,
+    "giocatori": "2–6",
+    "durata": "20–40 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "The Game",
+    "giocatoriMin": 1,
+    "giocatoriMax": 5,
+    "giocatori": "1–5",
+    "durata": "20 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "The Goonies – Never Say Die",
+    "giocatoriMin": 2,
+    "giocatoriMax": 5,
+    "giocatori": "2–5",
+    "durata": "60–90 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "The Legendary El Dorado",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "45–60 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "The Mind",
+    "giocatoriMin": 2,
+    "giocatoriMax": 4,
+    "giocatori": "2–4",
+    "durata": "15–20 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Throw Throw Burrito",
+    "giocatoriMin": 2,
+    "giocatoriMax": 6,
+    "giocatori": "2–6",
+    "durata": "15–25 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Tortuga",
+    "giocatoriMin": 3,
+    "giocatoriMax": 6,
+    "giocatori": "3–6",
+    "durata": "30–60 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Trivial Pursuit (1989)",
+    "giocatoriMin": 2,
+    "giocatoriMax": 6,
+    "giocatori": "2–6",
+    "durata": "60–120 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Unstable Unicorns",
+    "giocatoriMin": 2,
+    "giocatoriMax": 8,
+    "giocatori": "2–8",
+    "durata": "30–45 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Villainous Marvel",
+    "giocatoriMin": 2,
+    "giocatoriMax": 5,
+    "giocatori": "2–5",
+    "durata": "40–80 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Virus",
+    "giocatoriMin": 2,
+    "giocatoriMax": 6,
+    "giocatori": "2–6",
+    "durata": "20–45 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Whakaari",
+    "giocatoriMin": 3,
+    "giocatoriMax": 8,
+    "giocatori": "3–8",
+    "durata": "45–90 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Wonder Bowling",
+    "giocatoriMin": 1,
+    "giocatoriMax": 4,
+    "giocatori": "1–4",
+    "durata": "15–30 min",
+    "difficolta": "facile",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Zombicide (1ª edizione)",
+    "giocatoriMin": 1,
+    "giocatoriMax": 6,
+    "giocatori": "1–6",
+    "durata": "60–120 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  },
+  {
+    "titolo": "Zombicide Gear Up",
+    "giocatoriMin": 1,
+    "giocatoriMax": 6,
+    "giocatori": "1–6",
+    "durata": "60–120 min",
+    "difficolta": "media",
+    "disponibilita": "subito"
+  }
+]

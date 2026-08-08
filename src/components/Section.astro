@@ -1,0 +1,40 @@
+---
+/**
+ * Consistent section shell: surface tone, shared vertical rhythm, and a
+ * standard eyebrow/title/intro block. Keeping this in one place is what stops
+ * the page drifting into a stack of unrelated-looking blocks.
+ */
+interface Props {
+  id: string;
+  eyebrow?: string;
+  titolo: string;
+  intro?: string;
+  /** 'pergamena' is the parchment counterweight used for dense reading. */
+  tone?: 'notte' | 'notte-raised' | 'pergamena';
+  centered?: boolean;
+  class?: string;
+}
+
+const { id, eyebrow, titolo, intro, tone = 'notte', centered = false, class: className = '' } = Astro.props;
+
+const surfaces = {
+  notte: 'bg-notte text-crema',
+  'notte-raised': 'bg-notte-raised text-crema',
+  pergamena: 'bg-pergamena text-inchiostro',
+};
+
+const introTone = tone === 'pergamena' ? 'text-inchiostro-soft' : 'text-crema/70';
+const eyebrowTone = tone === 'pergamena' ? 'text-rame' : '';
+---
+
+<section id={id} class={`py-section lg:py-section-lg ${surfaces[tone]} ${className}`}>
+  <div class="container-page">
+    <header class={centered ? 'mx-auto max-w-2xl text-center' : 'max-w-2xl'}>
+      {eyebrow && <p class:list={['eyebrow', eyebrowTone]}>{eyebrow}</p>}
+      <h2 class="mt-3 text-3xl leading-tight font-semibold sm:text-4xl lg:text-5xl">{titolo}</h2>
+      {intro && <p class:list={['mt-5 text-lg leading-relaxed', introTone]}>{intro}</p>}
+    </header>
+
+    <slot />
+  </div>
+</section>

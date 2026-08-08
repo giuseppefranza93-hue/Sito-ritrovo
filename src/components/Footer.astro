@@ -1,0 +1,74 @@
+---
+import Logo from './Logo.astro';
+import { site, navigation, indirizzoCompleto, serateFisse } from '../data/site';
+
+const year = new Date().getFullYear();
+const serate = serateFisse();
+---
+
+<footer class="bg-notte border-notte-line border-t">
+  <div class="container-page py-16 lg:py-20">
+    <div class="grid gap-12 lg:grid-cols-12 lg:gap-8">
+      <div class="lg:col-span-5">
+        <Logo variante="completo" fondo="scuro" class="h-16 w-auto" />
+        <p class="mt-7 max-w-sm leading-relaxed text-crema/65">{site.description}</p>
+
+        <a
+          href={site.social.instagram}
+          target="_blank"
+          rel="noopener"
+          class="border-crema/25 hover:border-ottone hover:text-ottone-chiaro mt-8 inline-flex rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
+        >
+          {site.social.instagramHandle}
+        </a>
+      </div>
+
+      <nav class="lg:col-span-3" aria-label="Sezioni del sito">
+        <h2 class="eyebrow">Sul sito</h2>
+        <ul class="mt-5 space-y-3">
+          {
+            navigation.map((item) => (
+              <li>
+                <a href={item.href} class="text-crema/70 transition-colors hover:text-crema">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a href="#contatti" class="text-crema/70 transition-colors hover:text-crema">Contatti</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="lg:col-span-4">
+        <h2 class="eyebrow">Serate fisse</h2>
+        <dl class="mt-5 space-y-3 text-sm">
+          {
+            serate.map((giorno) => (
+              <div class="border-notte-line flex justify-between gap-4 border-b pb-3">
+                <dt class="text-crema/70">{giorno.label}</dt>
+                <dd class="font-medium tabular-nums">
+                  {giorno.opens} – {giorno.closes === '24:00' ? '00:00' : giorno.closes}
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+
+        <address class="mt-7 text-sm leading-relaxed text-crema/65 not-italic">
+          {indirizzoCompleto}<br />
+          <a href={`mailto:${site.email}`} class="underline underline-offset-4 hover:text-crema">{site.email}</a>
+        </address>
+      </div>
+    </div>
+
+    <div
+      class="border-notte-line mt-14 flex flex-col gap-4 border-t pt-8 text-sm text-crema/50 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>© {year} {site.name}</p>
+      {/* TODO: aggiungere codice fiscale / P.IVA dell'associazione e la pagina privacy. */}
+      <p>Associazione culturale · {site.tagline}</p>
+    </div>
+  </div>
+</footer>

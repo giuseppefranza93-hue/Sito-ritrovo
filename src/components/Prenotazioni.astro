@@ -1,0 +1,101 @@
+---
+/**
+ * Bookings.
+ *
+ * The client's two booking flows are kept exactly as they designed them —
+ * a seat on a scheduled event (confirmed immediately) and a custom table
+ * (emailed to the manager for approval) — along with the four table extras
+ * they already sell.
+ *
+ * Like the tessera, the forms themselves belong to the PHP application; this
+ * section explains the flows and links out. See README for wiring it up.
+ */
+import Section from './Section.astro';
+import { site } from '../data/site';
+
+// TODO: puntare ai form reali dell'applicazione esistente.
+const urlPrenotaEvento = '#eventi';
+const urlTavoloPersonalizzato = `mailto:${site.email}?subject=${encodeURIComponent('Richiesta tavolo personalizzato')}`;
+
+const flussi = [
+  {
+    titolo: 'Posto su un evento',
+    testo:
+      'Ti prenoti a una serata già in calendario. Il posto è confermato subito e i posti rimanenti si aggiornano in tempo reale.',
+    cta: 'Prenota un evento',
+    href: urlPrenotaEvento,
+    primario: true,
+  },
+  {
+    titolo: 'Tavolo personalizzato',
+    testo:
+      'Scegli giorno, gioco, numero di persone e servizi extra. La richiesta arriva a noi e ti rispondiamo con una conferma.',
+    cta: 'Richiedi un tavolo',
+    href: urlTavoloPersonalizzato,
+    primario: false,
+  },
+];
+
+const extra = [
+  { titolo: 'Trova tavolo', testo: 'Piazzami con altri, qualsiasi gioco va bene. Il modo più veloce per conoscere gente.' },
+  { titolo: 'Table setting', testo: 'Una persona dedicata che prepara il gioco e ve lo insegna dall’inizio.' },
+  { titolo: 'Tutor al tavolo', testo: 'Supporto durante la partita per spiegazioni, dubbi e regole.' },
+  { titolo: 'Dungeon master', testo: 'Un master del circolo che conduce la sessione di D&D o di gioco di ruolo.' },
+  { titolo: 'All you can snack', testo: 'Snack al tavolo tutto incluso per tutta la durata della partita.' },
+];
+---
+
+<Section
+  id="prenotazioni"
+  eyebrow="Prenotazioni"
+  titolo="Prenota il tuo tavolo"
+  intro="Per le serate fisse non serve prenotare. Se invece vuoi un tavolo tuo, un gioco preciso o qualcuno che ve lo insegni, avvisaci prima."
+  tone="pergamena"
+>
+  <div class="mt-12 grid gap-5 lg:mt-14 lg:grid-cols-2">
+    {
+      flussi.map((flusso) => (
+        <div
+          class:list={[
+            'flex flex-col rounded-card border p-8',
+            flusso.primario ? 'border-rame/40 bg-pergamena-sunk/50' : 'border-inchiostro/15',
+          ]}
+        >
+          <h3 class="font-display text-2xl font-semibold">{flusso.titolo}</h3>
+          <p class="text-inchiostro-soft mt-3 leading-relaxed">{flusso.testo}</p>
+          <a
+            href={flusso.href}
+            class:list={[
+              'mt-7 inline-flex w-fit rounded-full px-6 py-3.5 font-semibold transition-colors',
+              flusso.primario
+                ? 'bg-rame text-pergamena hover:bg-[#8d3a26]'
+                : 'border-inchiostro/25 hover:bg-inchiostro/5 border',
+            ]}
+          >
+            {flusso.cta}
+          </a>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="mt-14">
+    <h3 class="text-inchiostro-soft text-sm font-semibold tracking-[0.18em] uppercase">Servizi al tavolo</h3>
+
+    <ul class="border-inchiostro/15 mt-6 grid gap-px overflow-hidden rounded-card border bg-[color-mix(in_oklab,var(--color-inchiostro)_15%,transparent)] sm:grid-cols-2 lg:grid-cols-3">
+      {
+        extra.map((servizio) => (
+          <li class="bg-pergamena p-6">
+            <h4 class="font-display text-lg font-semibold">{servizio.titolo}</h4>
+            <p class="text-inchiostro-soft mt-2 text-sm leading-relaxed">{servizio.testo}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="text-inchiostro-soft mt-6 text-sm">
+      I servizi extra si scelgono al momento della richiesta del tavolo. Per gruppi numerosi scrivici con qualche giorno
+      di anticipo.
+    </p>
+  </div>
+</Section>
