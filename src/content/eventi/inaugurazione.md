@@ -6,8 +6,15 @@ categoria: Community
 posti: illimitati
 prenotazioneRichiesta: false
 inEvidenza: true
+programma:
+  - orario: '14:00 – 18:00'
+    cosa: Giochi da tavolo
+  - orario: '18:00 – 21:00'
+    cosa: Aperitivo & giochi
+  - orario: '21:00'
+    cosa: Musica dal vivo
 ---
 
-Dalle 14 alle 18 tavoli aperti con i giochi della ludoteca, dalle 18 alle 21
-aperitivo, dalle 21 musica dal vivo. Si entra quando si vuole e si resta quanto
-si vuole.
+Apre il Boardgame Inclusive Club. Si entra quando si vuole e si resta quanto si
+vuole: tavoli aperti tutto il pomeriggio, aperitivo la sera e musica dal vivo
+per chiudere.

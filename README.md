@@ -1,7 +1,7 @@
 # Il Ritrovo della Compagnia — sito
 
 Ricostruzione del sito di [Il Ritrovo della Compagnia](https://www.ilritrovodellacompagnia.it/),
-circolo ludico analogico a Valle Scuropasso (PV).
+boardgame inclusive club a Vallescuropasso, Cigognola (PV).
 
 Sito statico: nessun server da mantenere, nessun database, tempi di caricamento
 sotto il secondo anche da mobile in 3G.
@@ -36,12 +36,12 @@ Pages, Vercel) oppure via FTP sull'hosting Aruba attuale.
 Sono le uniche cose che bloccano la pubblicazione. Tutto il resto è pronto.
 
 1. **Le foto.** Ora ci sono segnaposto generati. Vedi "Sostituire le foto".
-2. **Numero di telefono** — non è pubblicato sul sito attuale. Se il circolo ne
-   ha uno, va in `src/data/site.ts`.
-3. **Coordinate GPS esatte** — in `src/data/site.ts` c'è un valore approssimato,
+2. **Coordinate GPS esatte** — in `src/data/site.ts` c'è un valore approssimato,
    usato per i dati strutturati e per la mappa.
-4. **Quote associative** — la sezione tessera descrive il funzionamento ma non
-   espone importi, perché non erano pubblicati.
+3. **Quota del tesseramento CSEN** e link alla pagina di tesseramento online
+   scontato (`site.tesseramento.quota` e `site.tesseramento.urlOnline`).
+4. **URL della pagina Facebook** — sulla locandina c'è l'icona ma non l'indirizzo
+   (`site.social.facebook`).
 5. **Codice fiscale / P.IVA dell'associazione** e pagina privacy, per il footer.
 6. **Modulo contatti**: vedi "Attivare il modulo contatti".
 
@@ -53,8 +53,9 @@ Ogni punto è segnato con `TODO` nel codice.
 
 ### Dati del circolo
 
-`src/data/site.ts` — indirizzo, email, orari, Instagram, numeri della hero.
-Nessun componente ha questi valori scritti dentro: si cambiano solo qui.
+`src/data/site.ts` — indirizzo, telefono, email, orari, social, tesseramento
+CSEN e numeri della hero. Nessun componente ha questi valori scritti dentro: si
+cambiano solo qui.
 
 ### Eventi
 
@@ -163,16 +164,24 @@ Web3Forms, oppure dello script PHP già esistente.
 
 ## Scelte progettuali
 
-**Perché scuro.** Il logo del cliente è un disegno a linee color crema (#fff1d6,
-campionato dal file originale) con luna e spada: è nato per stare su fondo
-scuro. La palette parte da lì.
+**La palette è quella del cliente, campionata dai suoi materiali** — non scelta
+a occhio. Dalla locandina ufficiale: fondo nero, rosso `#841418`–`#b81830` per
+la fascia e la luna, crema per il lettering. Il crema `#fff1d6` viene invece
+campionato direttamente dal PNG del logo, che è più pulito della resa stampata.
+
+**Come si usa il rosso.** Come sulla locandina: sul fondo nero è un riempimento
+— titoli grandi, pulsanti, filetti, la luna — mai testo piccolo, dove non
+reggerebbe il contrasto (2,2:1). Sulle sezioni pergamena diventa invece colore
+del testo, esattamente come il "12 SETTEMBRE" sulla sua toppa di carta strappata.
+Il crema sul rosso arriva a 7,6:1, ampiamente sopra la soglia AA.
 
 **Perché non tutto scuro.** Il rischio del tema notturno in questo settore è
 sembrare un covo per soli appassionati. Mox Boarding House ha rifatto il proprio
 sito proprio per questo: il fondo nero risultava _"forbidding or exclusive for
-casual gamers"_. Qui il fondo è un verde-nero caldo, mai nero puro, e le sezioni
-più dense da leggere — ludoteca, prenotazioni, contatti — stanno su pergamena
-chiara.
+casual gamers"_. Qui il nero è appena scaldato (`#0e0c0c`, non `#000`: su
+schermo retroilluminato il nero puro contro il crema vibra, sulla carta no) e le
+sezioni più dense da leggere — ludoteca, prenotazioni, contatti — stanno su
+pergamena, che è anche il secondo materiale della locandina.
 
 **Struttura.** L'ordine delle sezioni segue quello del sito attuale, con la
 galleria spostata subito dopo la presentazione: è la cosa che fa capire più in

@@ -14,10 +14,15 @@ import Section from './Section.astro';
 import giochi from '../data/giochi.json';
 import ludoteca from '../images/ludoteca.jpg';
 
+/**
+ * Difficulty badges on parchment. Red is reserved for the hardest tier so it
+ * reads as a warning rather than decoration; the easier tiers stay neutral ink,
+ * which keeps 80 badges from turning the catalogue into a colour chart.
+ */
 const difficoltaStile: Record<string, string> = {
-  facile: 'bg-[#1e4b3a]/12 text-[#1e4b3a]',
-  media: 'bg-[#c9982f]/22 text-[#7a5c12]',
-  alta: 'bg-[#a8503a]/14 text-[#8d3a26]',
+  facile: 'bg-inchiostro/8 text-inchiostro-soft',
+  media: 'bg-inchiostro/12 text-inchiostro',
+  alta: 'bg-rosso/12 text-rosso-scuro',
 };
 
 const conteggi = {
@@ -59,7 +64,7 @@ const ANTEPRIMA = 12;
         <p class="text-inchiostro-soft mt-4 leading-relaxed">
           {conteggi.facile} titoli su {conteggi.totale} sono adatti a chi non ha mai giocato.
         </p>
-        <a href="#prenotazioni" class="text-rame mt-5 inline-flex font-semibold underline underline-offset-4">
+        <a href="#prenotazioni" class="text-rosso mt-5 inline-flex font-semibold underline underline-offset-4">
           Prenota un tavolo con il gioco che vuoi
         </a>
       </div>
@@ -77,7 +82,7 @@ const ANTEPRIMA = 12;
             type="search"
             placeholder="Titolo del gioco"
             autocomplete="off"
-            class="border-inchiostro/20 focus:border-rame bg-pergamena mt-2 w-full rounded-lg border px-3 py-2.5 text-inchiostro outline-none"
+            class="border-inchiostro/20 focus:border-rosso bg-pergamena mt-2 w-full rounded-lg border px-3 py-2.5 text-inchiostro outline-none"
           />
         </div>
 
@@ -87,7 +92,7 @@ const ANTEPRIMA = 12;
           </label>
           <select
             id="filtro-giocatori"
-            class="border-inchiostro/20 focus:border-rame bg-pergamena mt-2 w-full rounded-lg border px-3 py-2.5 text-inchiostro outline-none"
+            class="border-inchiostro/20 focus:border-rosso bg-pergamena mt-2 w-full rounded-lg border px-3 py-2.5 text-inchiostro outline-none"
           >
             <option value="">Tutti i giocatori</option>
             {[1, 2, 3, 4, 5, 6, 8].map((n) => <option value={n}>{n === 8 ? '8 o più' : `${n} giocator${n === 1 ? 'e' : 'i'}`}</option>)}
@@ -100,7 +105,7 @@ const ANTEPRIMA = 12;
           </label>
           <select
             id="filtro-difficolta"
-            class="border-inchiostro/20 focus:border-rame bg-pergamena mt-2 w-full rounded-lg border px-3 py-2.5 text-inchiostro outline-none"
+            class="border-inchiostro/20 focus:border-rosso bg-pergamena mt-2 w-full rounded-lg border px-3 py-2.5 text-inchiostro outline-none"
           >
             <option value="">Tutte le difficoltà</option>
             <option value="facile">Facile</option>

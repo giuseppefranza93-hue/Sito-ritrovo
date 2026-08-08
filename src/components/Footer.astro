@@ -17,7 +17,7 @@ const serate = serateFisse();
           href={site.social.instagram}
           target="_blank"
           rel="noopener"
-          class="border-crema/25 hover:border-ottone hover:text-ottone-chiaro mt-8 inline-flex rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
+          class="border-crema/25 hover:border-rosso hover:text-rosso-chiaro mt-8 inline-flex rounded-full border px-5 py-2.5 text-sm font-medium transition-colors"
         >
           {site.social.instagramHandle}
         </a>
@@ -58,6 +58,7 @@ const serate = serateFisse();
 
         <address class="mt-7 text-sm leading-relaxed text-crema/65 not-italic">
           {indirizzoCompleto}<br />
+          <a href={`tel:${site.phoneHref}`} class="underline underline-offset-4 hover:text-crema">{site.phone}</a><br />
           <a href={`mailto:${site.email}`} class="underline underline-offset-4 hover:text-crema">{site.email}</a>
         </address>
       </div>

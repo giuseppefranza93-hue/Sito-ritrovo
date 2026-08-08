@@ -32,12 +32,18 @@ const indicazioni = `https://www.google.com/maps/dir/?api=1&destination=${indiri
 
       <address class="mt-8 space-y-3 text-base not-italic">
         <p class="flex items-start gap-3">
-          <span class="text-ottone" aria-hidden="true">📍</span>
+          <span class="text-rosso" aria-hidden="true">📍</span>
           <span>{indirizzoCompleto}</span>
         </p>
         <p class="flex items-start gap-3">
-          <span class="text-ottone" aria-hidden="true">✉️</span>
-          <a href={`mailto:${site.email}`} class="break-all underline underline-offset-4 hover:text-ottone-chiaro">
+          <span class="text-rosso" aria-hidden="true">📞</span>
+          <a href={`tel:${site.phoneHref}`} class="underline underline-offset-4 hover:text-rosso-chiaro">
+            {site.phone}
+          </a>
+        </p>
+        <p class="flex items-start gap-3">
+          <span class="text-rosso" aria-hidden="true">✉️</span>
+          <a href={`mailto:${site.email}`} class="break-all underline underline-offset-4 hover:text-rosso-chiaro">
             {site.email}
           </a>
         </p>
@@ -48,7 +54,7 @@ const indicazioni = `https://www.google.com/maps/dir/?api=1&destination=${indiri
           href={indicazioni}
           target="_blank"
           rel="noopener"
-          class="bg-ottone text-notte hover:bg-ottone-chiaro inline-flex rounded-full px-6 py-3.5 font-semibold transition-colors"
+          class="bg-rosso text-crema hover:bg-rosso-scuro inline-flex rounded-full px-6 py-3.5 font-semibold transition-colors"
         >
           Portami al circolo
         </a>
@@ -70,7 +76,7 @@ const indicazioni = `https://www.google.com/maps/dir/?api=1&destination=${indiri
       <svg class="absolute inset-0 h-full w-full opacity-[0.18]" aria-hidden="true">
         <defs>
           <pattern id="griglia" width="56" height="56" patternUnits="userSpaceOnUse">
-            <path d="M56 0H0v56" fill="none" stroke="var(--color-ottone)" stroke-width="1"></path>
+            <path d="M56 0H0v56" fill="none" stroke="var(--color-rosso)" stroke-width="1"></path>
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#griglia)"></rect>
@@ -78,14 +84,14 @@ const indicazioni = `https://www.google.com/maps/dir/?api=1&destination=${indiri
 
       <div class="relative flex h-full flex-col items-center justify-center p-10 text-center">
         <span class="relative flex h-5 w-5" aria-hidden="true">
-          <span class="bg-ottone absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"></span>
-          <span class="bg-ottone relative inline-flex h-5 w-5 rounded-full"></span>
+          <span class="bg-rosso absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"></span>
+          <span class="bg-rosso relative inline-flex h-5 w-5 rounded-full"></span>
         </span>
         <p class="font-display mt-6 text-2xl font-semibold">{site.address.street}</p>
         <p class="mt-2 text-crema/60">
           {site.address.postalCode} {site.address.city} ({site.address.province})
         </p>
-        <a href={indicazioni} target="_blank" rel="noopener" class="text-ottone-chiaro mt-6 underline underline-offset-4">
+        <a href={indicazioni} target="_blank" rel="noopener" class="text-rosso-chiaro mt-6 underline underline-offset-4">
           Apri le indicazioni stradali
         </a>
       </div>

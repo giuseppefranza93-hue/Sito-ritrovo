@@ -41,7 +41,7 @@ import hero from '../images/hero.jpg';
       <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
         <a
           href="#tessera"
-          class="bg-ottone text-notte hover:bg-ottone-chiaro inline-flex items-center rounded-full px-7 py-4 font-semibold shadow-lift-lg transition-colors"
+          class="bg-rosso text-crema hover:bg-rosso-scuro inline-flex items-center rounded-full px-7 py-4 font-semibold shadow-lift-lg transition-colors"
         >
           Crea la tua tessera
         </a>
@@ -62,7 +62,7 @@ import hero from '../images/hero.jpg';
         {
           site.numeri.map((n) => (
             <div class="flex items-baseline justify-center gap-3 py-5 sm:flex-col sm:items-center sm:gap-1 sm:py-7">
-              <dt class="font-display text-ottone text-3xl font-semibold sm:text-4xl">{n.valore}</dt>
+              <dt class="font-display text-rosso text-3xl font-semibold sm:text-4xl">{n.valore}</dt>
               <dd class="text-sm tracking-wide text-crema/65">{n.etichetta}</dd>
             </div>
           ))

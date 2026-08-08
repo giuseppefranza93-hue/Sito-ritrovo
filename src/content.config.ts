@@ -24,6 +24,10 @@ const eventi = defineCollection({
     categoria: z.string(),
     /** Shown instead of a single date for recurring nights. */
     ricorrenza: z.string().optional(),
+    /** Timetable within the event, as on the Inaugurazione poster. */
+    programma: z
+      .array(z.object({ orario: z.string(), cosa: z.string() }))
+      .optional(),
     posti: z.union([z.number(), z.literal('illimitati')]).default('illimitati'),
     prenotazioneRichiesta: z.boolean().default(false),
     inEvidenza: z.boolean().default(false),

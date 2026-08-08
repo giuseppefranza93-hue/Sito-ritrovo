@@ -20,7 +20,9 @@ export interface OpeningHours {
 export const site = {
   name: 'Il Ritrovo della Compagnia',
   shortName: 'Il Ritrovo',
-  tagline: 'Circolo ludico analogico',
+  tagline: 'Boardgame Inclusive Club',
+  /** Come si definiva il sito precedente; resta utile per i sottotitoli. */
+  sottotitolo: 'Circolo ludico analogico',
 
   /** The client's own positioning line. */
   claim: 'Il punto di ritrovo per chi ama il gioco non digitale',
@@ -28,21 +30,23 @@ export const site = {
   promessa: 'Circolo inclusivo e non esclusivo.',
 
   description:
-    'Circolo ludico analogico a Valle Scuropasso: giochi da tavolo, Pokémon, Magic e giochi di ruolo. Atmosfera da gilda, energia da torneo, accoglienza da compagnia.',
+    'Boardgame inclusive club a Vallescuropasso (Cigognola, PV): giochi da tavolo, Pokémon, Magic e giochi di ruolo. Atmosfera da gilda, energia da torneo, accoglienza da compagnia.',
 
   address: {
-    street: 'SP198, 117',
+    street: 'SP 198, 117',
+    /** Località, come indicata sulla locandina. */
+    localita: 'Vallescuropasso',
     postalCode: '27040',
-    city: 'Valle Scuropasso',
+    city: 'Cigognola',
     province: 'PV',
     region: 'Lombardia',
     country: 'IT',
   },
 
   email: 'info@ilritrovodellacompagnia.it',
-  /** TODO: il sito attuale non pubblica un numero di telefono. Chiederlo al cliente. */
-  phone: '',
-  phoneHref: '',
+  phone: '352 218 5856',
+  /** E.164, senza spazi: per i link tel: e wa.me. */
+  phoneHref: '+393522185856',
 
   /** Short link taken from the client's existing "Dove siamo" section. */
   mapsUrl: 'https://maps.app.goo.gl/JvZLMrkzNYQFjNqd8',
@@ -52,6 +56,22 @@ export const site = {
   social: {
     instagram: 'https://www.instagram.com/ilritrovodellacompagnia/',
     instagramHandle: '@ilritrovodellacompagnia',
+    // TODO: chiedere l'URL esatto della pagina Facebook (sulla locandina c'è solo l'icona).
+    facebook: '',
+    whatsapp: 'https://wa.me/393522185856',
+  },
+
+  /**
+   * Tesseramento. Il circolo è affiliato CSEN: la tessera è obbligatoria per
+   * giocare, dai 6 anni in su, e si può fare online a prezzo scontato.
+   */
+  tesseramento: {
+    ente: 'CSEN',
+    enteEsteso: 'Centro Sportivo Educativo Nazionale',
+    etaMinima: 6,
+    // TODO: importo della quota e link al tesseramento online scontato.
+    quota: '',
+    urlOnline: '',
   },
 
   /**
@@ -89,7 +109,7 @@ export const navigation = [
   { href: '#dove-siamo', label: 'Dove siamo' },
 ] as const;
 
-export const indirizzoCompleto = `${site.address.street} · ${site.address.postalCode} ${site.address.city} ${site.address.province}`;
+export const indirizzoCompleto = `${site.address.street}, ${site.address.localita} · ${site.address.postalCode} ${site.address.city} (${site.address.province})`;
 
 /** Monday-first display order, independent of the Date#getDay() numbering. */
 export function hoursInWeekOrder(): OpeningHours[] {

@@ -14,15 +14,16 @@
 import { Image } from 'astro:assets';
 import Section from './Section.astro';
 import tessera from '../images/tessera.jpg';
+import { site } from '../data/site';
 
 // TODO: sostituire con l'URL reale della domanda di ammissione (app PHP esistente).
-const urlIscrizione = '#contatti';
+const urlIscrizione = site.tesseramento.urlOnline || '#contatti';
 
 const passaggi = [
   {
     titolo: 'Compili la domanda',
     testo:
-      'Dati anagrafici, codice fiscale e firma. Servono per la domanda di ammissione a socio: siamo un circolo, non un negozio.',
+      'Dati anagrafici, codice fiscale e firma: servono per la domanda di ammissione a socio e per il tesseramento CSEN.',
   },
   {
     titolo: 'Ricevi tessera e Statuto',
@@ -48,7 +49,7 @@ const passaggi = [
         {
           passaggi.map((passaggio, index) => (
             <li class="flex gap-6">
-              <span class="border-ottone/40 text-ottone font-display flex h-12 w-12 shrink-0 items-center justify-center rounded-full border text-xl font-semibold">
+              <span class="border-rosso/40 text-rosso font-display flex h-12 w-12 shrink-0 items-center justify-center rounded-full border text-xl font-semibold">
                 {index + 1}
               </span>
               <div>
@@ -60,7 +61,23 @@ const passaggi = [
         }
       </ol>
 
-      <div class="border-notte-line mt-12 rounded-card border p-7">
+      <!--
+        CSEN affiliation. This is the single most important practical fact for a
+        first-time visitor — membership is compulsory to play — and it appeared
+        nowhere on the old site, only on the poster.
+      -->
+      <div class="border-rosso/40 bg-rosso/8 mt-12 rounded-card border p-7">
+        <p class="eyebrow text-rosso-chiaro">Tesseramento {site.tesseramento.ente} obbligatorio</p>
+        <p class="mt-3 leading-relaxed text-crema/80">
+          Il circolo è affiliato {site.tesseramento.ente} ({site.tesseramento.enteEsteso}). Per giocare serve la
+          tessera, obbligatoria a partire dai {site.tesseramento.etaMinima} anni.
+        </p>
+        <p class="mt-3 leading-relaxed text-crema/70">
+          Ci si può tesserare online a prezzo scontato, oppure direttamente in sede la prima volta che vieni.
+        </p>
+      </div>
+
+      <div class="border-notte-line mt-5 rounded-card border p-7">
         <h3 class="text-lg font-semibold">Cosa ti dà la tessera</h3>
         <ul class="mt-4 grid gap-3 sm:grid-cols-2">
           {
@@ -71,7 +88,7 @@ const passaggi = [
               'Eventi e tornei riservati ai soci',
             ].map((voce) => (
               <li class="flex items-start gap-3 text-crema/75">
-                <span class="bg-ottone mt-2 h-1.5 w-1.5 shrink-0 rounded-full" aria-hidden="true" />
+                <span class="bg-rosso mt-2 h-1.5 w-1.5 shrink-0 rounded-full" aria-hidden="true" />
                 {voce}
               </li>
             ))
@@ -81,7 +98,7 @@ const passaggi = [
 
       <a
         href={urlIscrizione}
-        class="bg-ottone text-notte hover:bg-ottone-chiaro mt-10 inline-flex rounded-full px-7 py-4 font-semibold transition-colors"
+        class="bg-rosso text-crema hover:bg-rosso-chiaro mt-10 inline-flex rounded-full px-7 py-4 font-semibold transition-colors"
       >
         Crea la tua tessera
       </a>

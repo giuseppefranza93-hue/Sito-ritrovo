@@ -58,7 +58,7 @@ const extra = [
         <div
           class:list={[
             'flex flex-col rounded-card border p-8',
-            flusso.primario ? 'border-rame/40 bg-pergamena-sunk/50' : 'border-inchiostro/15',
+            flusso.primario ? 'border-rosso/40 bg-pergamena-sunk/50' : 'border-inchiostro/15',
           ]}
         >
           <h3 class="font-display text-2xl font-semibold">{flusso.titolo}</h3>
@@ -68,7 +68,7 @@ const extra = [
             class:list={[
               'mt-7 inline-flex w-fit rounded-full px-6 py-3.5 font-semibold transition-colors',
               flusso.primario
-                ? 'bg-rame text-pergamena hover:bg-[#8d3a26]'
+                ? 'bg-rosso text-pergamena hover:bg-rosso-scuro'
                 : 'border-inchiostro/25 hover:bg-inchiostro/5 border',
             ]}
           >

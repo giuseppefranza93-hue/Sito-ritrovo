@@ -44,10 +44,10 @@ const formatoMese = new Intl.DateTimeFormat('it-IT', { month: 'short', timeZone:
 
         <ul class="mt-6 grid gap-5 lg:grid-cols-2">
           {singoli.map((evento) => (
-            <li class="bg-notte border-ottone/35 rounded-card border p-7">
+            <li class="bg-notte border-rosso/35 rounded-card border p-7">
               <div class="flex items-start gap-6">
-                <div class="border-ottone/40 shrink-0 rounded-lg border px-4 py-3 text-center">
-                  <span class="font-display text-ottone block text-3xl leading-none font-semibold tabular-nums">
+                <div class="border-rosso/40 shrink-0 rounded-lg border px-4 py-3 text-center">
+                  <span class="font-display text-rosso block text-3xl leading-none font-semibold tabular-nums">
                     {evento.data.data.getDate()}
                   </span>
                   <span class="mt-1 block text-xs tracking-widest text-crema/60 uppercase">
@@ -66,6 +66,19 @@ const formatoMese = new Intl.DateTimeFormat('it-IT', { month: 'short', timeZone:
                   <div class="mt-4 leading-relaxed text-crema/75">
                     <evento.Content />
                   </div>
+
+                  {evento.data.programma && (
+                    <dl class="border-notte-line mt-5 divide-y divide-[color-mix(in_oklab,var(--color-crema)_12%,transparent)] border-t border-b">
+                      {evento.data.programma.map((riga) => (
+                        <div class="flex flex-wrap items-baseline gap-x-4 py-2.5">
+                          <dt class="text-rosso-chiaro w-32 shrink-0 text-sm font-semibold tabular-nums">
+                            {riga.orario}
+                          </dt>
+                          <dd class="text-sm text-crema/80">{riga.cosa}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  )}
 
                   <p class="mt-5 text-sm text-crema/55">
                     {evento.data.posti === 'illimitati' ? 'Posti illimitati' : `${evento.data.posti} posti`}
@@ -89,7 +102,7 @@ const formatoMese = new Intl.DateTimeFormat('it-IT', { month: 'short', timeZone:
           <li class="bg-notte flex flex-col p-7">
             <p class="eyebrow">{evento.data.categoria}</p>
             <h4 class="font-display mt-2 text-2xl font-semibold">{evento.data.titolo}</h4>
-            <p class="text-ottone-chiaro mt-1 text-sm font-medium">
+            <p class="text-rosso-chiaro mt-1 text-sm font-medium">
               {evento.data.ricorrenza} · dalle {evento.data.oraInizio}
             </p>
             <div class="mt-4 leading-relaxed text-crema/70">
@@ -107,7 +120,7 @@ const formatoMese = new Intl.DateTimeFormat('it-IT', { month: 'short', timeZone:
       href="https://www.instagram.com/ilritrovodellacompagnia/"
       target="_blank"
       rel="noopener"
-      class="text-ottone-chiaro underline underline-offset-4"
+      class="text-rosso-chiaro underline underline-offset-4"
     >
       Instagram
     </a>.

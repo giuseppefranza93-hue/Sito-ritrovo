@@ -33,13 +33,13 @@ import { site, indirizzoCompleto, hoursInWeekOrder } from '../data/site';
       </div>
 
       <div class="py-6 sm:py-7 sm:pl-8">
-        <p class="eyebrow">Scrivici</p>
-        <p class="font-display mt-2.5 text-xl font-semibold break-all">
-          <a href={`mailto:${site.email}`} class="hover:text-ottone-chiaro transition-colors">{site.email}</a>
+        <p class="eyebrow">Info e prenotazioni</p>
+        <p class="font-display mt-2.5 text-xl font-semibold">
+          <a href={`tel:${site.phoneHref}`} class="hover:text-rosso-chiaro transition-colors">{site.phone}</a>
         </p>
         <p class="mt-1 text-sm text-crema/60">
-          <a href={site.social.instagram} target="_blank" rel="noopener" class="underline underline-offset-4 hover:text-crema">
-            {site.social.instagramHandle}
+          <a href={site.social.whatsapp} target="_blank" rel="noopener" class="underline underline-offset-4 hover:text-crema">
+            Scrivici su WhatsApp
           </a>
         </p>
       </div>
@@ -107,8 +107,8 @@ import { site, indirizzoCompleto, hoursInWeekOrder } from '../data/site';
     if (closesAt) {
       statusEl.innerHTML = `<span class="inline-flex items-center gap-2">
         <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
-          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-ottone opacity-70"></span>
-          <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-ottone"></span>
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-rosso opacity-70"></span>
+          <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-rosso"></span>
         </span>Siamo aperti ora</span>`;
       detailEl.textContent = `Si chiude alle ${closesAt === '24:00' ? '00:00' : closesAt}`;
     } else {

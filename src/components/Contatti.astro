@@ -22,8 +22,19 @@ const formAttivo = site.formEndpoint.length > 0;
   <div class="mt-12 grid gap-5 lg:mt-14 lg:grid-cols-12">
     <div class="lg:col-span-5">
       <a
+        href={site.social.whatsapp}
+        target="_blank"
+        rel="noopener"
+        class="border-inchiostro/15 hover:border-rosso/50 block rounded-card border p-7 transition-colors"
+      >
+        <p class="eyebrow">Info e prenotazioni</p>
+        <p class="font-display mt-3 text-xl font-semibold">{site.phone}</p>
+        <p class="text-inchiostro-soft mt-2 text-sm">Telefono e WhatsApp — il modo più rapido</p>
+      </a>
+
+      <a
         href={`mailto:${site.email}`}
-        class="border-inchiostro/15 hover:border-rame/50 block rounded-card border p-7 transition-colors"
+        class="border-inchiostro/15 hover:border-rosso/50 mt-5 block rounded-card border p-7 transition-colors"
       >
         <p class="eyebrow">Email</p>
         <p class="font-display mt-3 text-xl font-semibold break-all">{site.email}</p>
@@ -34,7 +45,7 @@ const formAttivo = site.formEndpoint.length > 0;
         href={site.social.instagram}
         target="_blank"
         rel="noopener"
-        class="border-inchiostro/15 hover:border-rame/50 mt-5 block rounded-card border p-7 transition-colors"
+        class="border-inchiostro/15 hover:border-rosso/50 mt-5 block rounded-card border p-7 transition-colors"
       >
         <p class="eyebrow">Instagram</p>
         <p class="font-display mt-3 text-xl font-semibold">{site.social.instagramHandle}</p>
@@ -48,7 +59,7 @@ const formAttivo = site.formEndpoint.length > 0;
         </p>
         <a
           href="#tessera"
-          class="bg-rame text-pergamena mt-5 inline-flex rounded-full px-6 py-3 font-semibold transition-colors hover:bg-[#8d3a26]"
+          class="bg-rosso text-pergamena mt-5 inline-flex rounded-full px-6 py-3 font-semibold transition-colors hover:bg-rosso-scuro"
         >
           Crea la tua tessera
         </a>
@@ -74,7 +85,7 @@ const formAttivo = site.formEndpoint.length > 0;
                   type="text"
                   required
                   autocomplete="name"
-                  class="border-inchiostro/20 focus:border-rame bg-pergamena mt-2 w-full rounded-lg border px-4 py-3 outline-none"
+                  class="border-inchiostro/20 focus:border-rosso bg-pergamena mt-2 w-full rounded-lg border px-4 py-3 outline-none"
                 />
               </div>
               <div>
@@ -87,7 +98,7 @@ const formAttivo = site.formEndpoint.length > 0;
                   type="email"
                   required
                   autocomplete="email"
-                  class="border-inchiostro/20 focus:border-rame bg-pergamena mt-2 w-full rounded-lg border px-4 py-3 outline-none"
+                  class="border-inchiostro/20 focus:border-rosso bg-pergamena mt-2 w-full rounded-lg border px-4 py-3 outline-none"
                 />
               </div>
             </div>
@@ -100,7 +111,7 @@ const formAttivo = site.formEndpoint.length > 0;
                 id="oggetto"
                 name="oggetto"
                 type="text"
-                class="border-inchiostro/20 focus:border-rame bg-pergamena mt-2 w-full rounded-lg border px-4 py-3 outline-none"
+                class="border-inchiostro/20 focus:border-rosso bg-pergamena mt-2 w-full rounded-lg border px-4 py-3 outline-none"
               />
             </div>
 
@@ -113,13 +124,13 @@ const formAttivo = site.formEndpoint.length > 0;
                 name="messaggio"
                 rows="5"
                 required
-                class="border-inchiostro/20 focus:border-rame bg-pergamena mt-2 w-full rounded-lg border px-4 py-3 outline-none"
+                class="border-inchiostro/20 focus:border-rosso bg-pergamena mt-2 w-full rounded-lg border px-4 py-3 outline-none"
               />
             </div>
 
             <button
               type="submit"
-              class="bg-rame text-pergamena mt-7 inline-flex rounded-full px-7 py-3.5 font-semibold transition-colors hover:bg-[#8d3a26]"
+              class="bg-rosso text-pergamena mt-7 inline-flex rounded-full px-7 py-3.5 font-semibold transition-colors hover:bg-rosso-scuro"
             >
               Invia richiesta
             </button>
@@ -133,7 +144,7 @@ const formAttivo = site.formEndpoint.length > 0;
             </p>
             <a
               href={`mailto:${site.email}?subject=${encodeURIComponent('Informazioni Il Ritrovo della Compagnia')}`}
-              class="bg-rame text-pergamena mt-8 inline-flex w-fit rounded-full px-7 py-3.5 font-semibold transition-colors hover:bg-[#8d3a26]"
+              class="bg-rosso text-pergamena mt-8 inline-flex w-fit rounded-full px-7 py-3.5 font-semibold transition-colors hover:bg-rosso-scuro"
             >
               Scrivi una email
             </a>

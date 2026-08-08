@@ -14,10 +14,10 @@ import { fileURLToPath } from 'node:url';
 
 const outDir = fileURLToPath(new URL('../src/images/', import.meta.url));
 
-const NOTTE = '#142a20';
+const NOTTE = '#171313';
 const CREMA = '#fff1d6';
-const LINEA = '#27503d';
-const OTTONE = '#c9982f';
+const LINEA = '#5c2a26';
+const ROSSO = '#b31b22';
 
 /** A muted plate with a hairline frame, a label, and the expected dimensions. */
 function plate({ width, height, label, index, total }) {
@@ -29,8 +29,8 @@ function plate({ width, height, label, index, total }) {
   return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="0.4" y2="1">
-      <stop offset="0%" stop-color="#173026"/>
-      <stop offset="100%" stop-color="#0e1f17"/>
+      <stop offset="0%" stop-color="#1c1616"/>
+      <stop offset="100%" stop-color="#0e0c0c"/>
     </linearGradient>
     <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
       <circle cx="14" cy="14" r="1.4" fill="${CREMA}" fill-opacity="0.10"/>
@@ -40,13 +40,19 @@ function plate({ width, height, label, index, total }) {
   <rect width="100%" height="100%" fill="url(#dots)"/>
   <rect x="${inset}" y="${inset}" width="${width - inset * 2}" height="${height - inset * 2}"
         fill="none" stroke="${LINEA}" stroke-opacity="0.9" stroke-width="2"/>
-  <text x="50%" y="47%" text-anchor="middle" fill="${CREMA}"
+  ${
+    // An empty label means a plate that sits behind other content (the hero):
+    // draw only the texture, since any caption would read as a mistake.
+    label
+      ? `<text x="50%" y="47%" text-anchor="middle" fill="${CREMA}"
         font-family="Georgia, 'Times New Roman', serif" font-size="${titleSize}" font-style="italic">${label}</text>
   <text x="50%" y="47%" dy="${titleSize * 1.5}" text-anchor="middle" fill="${CREMA}" fill-opacity="0.55"
-        font-family="Helvetica, Arial, sans-serif" font-size="${metaSize}" letter-spacing="${metaSize * 0.18}">FOTO SEGNAPOSTO · ${width}×${height}</text>
+        font-family="Helvetica, Arial, sans-serif" font-size="${metaSize}" letter-spacing="${metaSize * 0.18}">FOTO SEGNAPOSTO · ${width}×${height}</text>`
+      : ''
+  }
   ${
     counter
-      ? `<text x="${width - inset * 2}" y="${inset * 2.6}" text-anchor="end" fill="${OTTONE}"
+      ? `<text x="${width - inset * 2}" y="${inset * 2.6}" text-anchor="end" fill="${ROSSO}"
         font-family="Helvetica, Arial, sans-serif" font-size="${metaSize}" font-weight="bold"
         letter-spacing="${metaSize * 0.14}">${counter}</text>`
       : ''

@@ -1,16 +1,21 @@
 /*
  * Il Ritrovo della Compagnia — design system
  *
- * The palette is taken from the client's own logo rather than invented: the
- * wordmark is cream line art (#fff1d6 sampled straight from the PNG) drawn for
- * a dark ground — a crescent moon and a sword. So the brand is nocturnal, and
- * the site is built dark to let the logo sit on its intended background.
+ * The palette is the client's own, sampled from their official poster and
+ * logo artwork rather than invented:
+ *   nero    #000     — the poster ground
+ *   rosso   #841418 → #b81830 — the banner and moon ink
+ *   crema   #fff1d6  — sampled from the logo PNG
  *
- * The risk with a dark site in this category is looking like a gamer cave and
- * scaring off casual visitors — the mistake Mox Boarding House publicly
- * rebuilt their own site to fix. Two things keep it approachable here: the
- * ground is a warm green-black rather than pure black, and the dense reading
- * sections (ludoteca, tessera, orari) sit on parchment instead of dark.
+ * How red is used follows the poster: on the black ground it is a fill — big
+ * display type, the moon, rules and buttons — never small body text, where it
+ * would not carry enough contrast. On the parchment sections red becomes the
+ * text colour, exactly as "12 SETTEMBRE" sits on its torn-paper patch.
+ *
+ * The risk with a dark site in this category is looking like a gamer cave —
+ * the mistake Mox Boarding House publicly rebuilt their site to fix. Here the
+ * dense reading sections (ludoteca, prenotazioni, contatti) sit on parchment,
+ * which is also true to the poster's mix of black and aged paper.
  */
 
 @import 'tailwindcss';
@@ -19,33 +24,37 @@
 @import '@fontsource-variable/inter/index.css';
 
 @theme {
-  /* Night — the primary brand ground, green-black and warm, never pure black. */
-  --color-notte: #0e1f17;
-  --color-notte-raised: #142a20;
-  --color-notte-soft: #1c3a2c;
-  --color-notte-line: #27503d;
+  /* Ground. Warm near-black rather than the poster's pure #000: on a backlit
+     screen pure black against cream vibrates, on printed ink it does not. */
+  --color-notte: #0e0c0c;
+  --color-notte-raised: #171313;
+  --color-notte-line: #33231f;
 
   /* Cream — sampled from the logo artwork. */
   --color-crema: #fff1d6;
 
-  /* Parchment — the light counterweight for dense reading sections. */
-  --color-pergamena: #f6ead2;
-  --color-pergamena-sunk: #ecdcbd;
-  --color-inchiostro: #14241b;
-  --color-inchiostro-soft: #4a5a4e;
+  /* Red — the poster's two reds: the deep aged banner and the brighter accent. */
+  --color-rosso: #b31b22;
+  --color-rosso-scuro: #7e1116;
+  --color-rosso-chiaro: #d93a42;
 
-  /* Candlelight accents. */
-  --color-ottone: #c9982f;
-  --color-ottone-chiaro: #e5c887;
-  --color-rame: #a8503a;
+  /* Warm tan, for small caps on the dark ground where red cannot pass contrast. */
+  --color-tan: #d9bba6;
+
+  /* Parchment — the poster's torn-paper patches, and the counterweight that
+     keeps the dense sections readable. */
+  --color-pergamena: #e9dcc6;
+  --color-pergamena-sunk: #dbc9ae;
+  --color-inchiostro: #17110f;
+  --color-inchiostro-soft: #574840;
 
   --font-display: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
   --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --radius-card: 0.875rem;
 
-  --shadow-lift: 0 1px 2px rgb(0 0 0 / 0.2), 0 12px 32px -16px rgb(0 0 0 / 0.55);
-  --shadow-lift-lg: 0 2px 6px rgb(0 0 0 / 0.25), 0 32px 64px -28px rgb(0 0 0 / 0.7);
+  --shadow-lift: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -16px rgb(0 0 0 / 0.7);
+  --shadow-lift-lg: 0 2px 6px rgb(0 0 0 / 0.35), 0 32px 64px -28px rgb(0 0 0 / 0.85);
 
   --spacing-section: 5rem;
   --spacing-section-lg: 7.5rem;
@@ -91,14 +100,14 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-ottone);
+    outline: 2px solid var(--color-rosso-chiaro);
     outline-offset: 3px;
     border-radius: 2px;
   }
 
   ::selection {
-    background-color: var(--color-ottone);
-    color: var(--color-notte);
+    background-color: var(--color-rosso);
+    color: var(--color-crema);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -136,5 +145,6 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-ottone);
+  /* Tan by default (dark ground); Section.astro swaps it to red on parchment. */
+  color: var(--color-tan);
 }
