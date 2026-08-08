@@ -148,3 +148,17 @@
   /* Tan by default (dark ground); Section.astro swaps it to red on parchment. */
   color: var(--color-tan);
 }
+
+/*
+ * Ancoraggio fuori dai cascade layer.
+ *
+ * Le regole in @layer base perdono sempre contro CSS non-layered, qualunque
+ * sia la specificità. Se la pagina viene incorporata in un contenitore che
+ * applica il proprio reset — come succede impacchettando l'anteprima — un
+ * `body { color }` esterno vincerebbe e il testo che eredita finirebbe scuro
+ * su scuro. Queste due righe stanno fuori da ogni layer apposta.
+ */
+body {
+  background-color: var(--color-notte);
+  color: var(--color-crema);
+}

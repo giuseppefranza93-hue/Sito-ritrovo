@@ -135,6 +135,19 @@ const ROUTER = `<script>
   })();
 </script>`;
 
+/*
+ * Inline style on the wrapper, as a floor under the whole page.
+ *
+ * Tailwind puts `body { color }` inside @layer base, and unlayered CSS beats
+ * layered CSS whatever the specificity — so a host reset around this file can
+ * repaint the inherited text colour and leave headings dark on dark. Setting
+ * it inline on an element the host's reset does not target removes the whole
+ * class of problem. The components carry explicit colours too; this is belt
+ * and braces, because a preview is the one place the surrounding CSS is
+ * unknown.
+ */
+const STILE_ANCORA = 'background-color:#0e0c0c;color:#fff1d6';
+
 const argomento = process.argv[2];
 
 await mkdir(outDir, { recursive: true });
@@ -143,7 +156,7 @@ if (argomento && argomento !== '--completo') {
   // Modalità pagina singola.
   const nome = process.argv[3] ?? 'anteprima';
   const p = await preparaPagina(argomento);
-  const out = `<title>${p.titolo}</title>\n${p.stile}\n${p.jsonLd}\n<div lang="it">\n${p.body}\n</div>\n`;
+  const out = `<title>${p.titolo}</title>\n${p.stile}\n${p.jsonLd}\n<div lang="it" style="${STILE_ANCORA}">\n${p.body}\n</div>\n`;
   await writeFile(outDir + nome + '.html', out);
   console.log(`${nome}.html — ${Math.round(Buffer.byteLength(out) / 1024)} kB`);
 } else {
@@ -169,7 +182,7 @@ if (argomento && argomento !== '--completo') {
   const out = `<title>${home.titolo}</title>
 ${home.stile}
 ${home.jsonLd}
-<div lang="it">
+<div lang="it" style="${STILE_ANCORA}">
 ${testa}
 <main id="contenuto" data-vista="home">
 ${corpoHome}
