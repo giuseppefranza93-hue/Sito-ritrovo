@@ -9,8 +9,33 @@
  * Run with: npm run placeholders
  */
 import sharp from 'sharp';
-import { mkdir } from 'node:fs/promises';
+import { mkdir, access } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
+
+/*
+ * The real photographs now live in src/images/. This script must never clobber
+ * them, so every write is skipped when the file already exists — pass --force
+ * only if you genuinely want the placeholders back.
+ */
+const forza = process.argv.includes('--force');
+
+async function esiste(percorso) {
+  try {
+    await access(percorso);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/** Writes a plate only when there is nothing there to protect. */
+async function scrivi(percorso, opzioni) {
+  if (!forza && (await esiste(percorso))) {
+    console.log(`salto ${percorso.split('/src/images/').pop()} — esiste già`);
+    return;
+  }
+  await sharp(plate(opzioni)).jpeg({ quality: 82, mozjpeg: true }).toFile(percorso);
+}
 
 const outDir = fileURLToPath(new URL('../src/images/', import.meta.url));
 
@@ -61,33 +86,31 @@ function plate({ width, height, label, index, total }) {
 }
 
 const gallery = [
+  "L'ingresso",
   'La sala del circolo',
   'Gli scaffali della ludoteca',
-  'Tavolo di Commander',
-  'Serata Pokémon',
-  'Torneo di biliardino',
-  'Il tavolo dei nuovi giocatori',
-  'Making of',
-  'Dettagli dal tavolo',
+  'Una serata',
+  'Chi vi accoglie',
 ];
 
 await mkdir(new URL('../src/images/galleria/', import.meta.url), { recursive: true });
 
-// Carousel plates: 16:9, the aspect ratio the gallery is laid out for.
+// Carousel plates: 4:3, matching the client's photographs.
 await Promise.all(
   gallery.map((label, i) =>
-    sharp(plate({ width: 1600, height: 900, label, index: i + 1, total: gallery.length }))
-      .jpeg({ quality: 82, mozjpeg: true })
-      .toFile(`${outDir}galleria/galleria-${String(i + 1).padStart(2, '0')}.jpg`),
+    scrivi(`${outDir}galleria/galleria-${String(i + 1).padStart(2, '0')}.jpg`, {
+      width: 1448,
+      height: 1086,
+      label,
+      index: i + 1,
+      total: gallery.length,
+    }),
   ),
 );
 
-// Hero: taller crop, since it sits behind text on mobile. No label — the logo
-// sits on top of it, and a caption showing through behind the wordmark reads
-// as a mistake rather than as a placeholder.
-await sharp(plate({ width: 2400, height: 1600, label: '' }))
-  .jpeg({ quality: 82, mozjpeg: true })
-  .toFile(`${outDir}hero.jpg`);
+// Hero: no label — the logo sits on top of it, and a caption showing through
+// behind the wordmark reads as a mistake rather than as a placeholder.
+await scrivi(`${outDir}hero.jpg`, { width: 1448, height: 1086, label: '' });
 
 // Supporting imagery for the narrower sections.
 for (const [name, label] of [
@@ -95,14 +118,10 @@ for (const [name, label] of [
   ['tessera', 'La Compagnia Card'],
   ['circolo', 'Il circolo'],
 ]) {
-  await sharp(plate({ width: 1400, height: 1050, label }))
-    .jpeg({ quality: 82, mozjpeg: true })
-    .toFile(`${outDir}${name}.jpg`);
+  await scrivi(`${outDir}${name}.jpg`, { width: 1448, height: 1086, label });
 }
 
 // Open Graph card, 1.91:1.
-await sharp(plate({ width: 1200, height: 630, label: 'Il Ritrovo della Compagnia' }))
-  .jpeg({ quality: 85, mozjpeg: true })
-  .toFile(`${outDir}og.jpg`);
+await scrivi(`${outDir}og.jpg`, { width: 1200, height: 630, label: 'Il Ritrovo della Compagnia' });
 
-console.log('Segnaposto generati in src/images/');
+console.log('Segnaposto aggiornati. Le foto reali esistenti non sono state toccate.');

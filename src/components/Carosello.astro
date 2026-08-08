@@ -65,11 +65,11 @@ const slides = Object.entries(modules)
               <div class="bg-notte-raised overflow-hidden rounded-card shadow-lift">
                 <Image
                   src={slide.src}
-                  alt={slide.caption || `Foto del locale ${index + 1}`}
-                  widths={[480, 768, 1200, 1600]}
+                  alt={slide.caption || `Foto del circolo ${index + 1}`}
+                  widths={[480, 768, 1088, 1448]}
                   sizes="(min-width: 1280px) 42vw, (min-width: 768px) 55vw, 85vw"
                   loading={index === 0 ? 'eager' : 'lazy'}
-                  class="aspect-video h-full w-full object-cover"
+                  class="aspect-[4/3] h-full w-full object-cover"
                 />
               </div>
               {slide.caption && (
@@ -141,13 +141,13 @@ const slides = Object.entries(modules)
     }
 
     .carousel-slide {
-      flex-basis: 55%;
+      flex-basis: 48%;
     }
   }
 
   @media (width >= 80rem) {
     .carousel-slide {
-      flex-basis: 42%;
+      flex-basis: 36%;
     }
   }
 

@@ -35,15 +35,14 @@ Pages, Vercel) oppure via FTP sull'hosting Aruba attuale.
 
 Sono le uniche cose che bloccano la pubblicazione. Tutto il resto è pronto.
 
-1. **Le foto.** Ora ci sono segnaposto generati. Vedi "Sostituire le foto".
-2. **Coordinate GPS esatte** — in `src/data/site.ts` c'è un valore approssimato,
+1. **Coordinate GPS esatte** — in `src/data/site.ts` c'è un valore approssimato,
    usato per i dati strutturati e per la mappa.
-3. **Quota del tesseramento CSEN** e link alla pagina di tesseramento online
+2. **Quota del tesseramento CSEN** e link alla pagina di tesseramento online
    scontato (`site.tesseramento.quota` e `site.tesseramento.urlOnline`).
-4. **URL della pagina Facebook** — sulla locandina c'è l'icona ma non l'indirizzo
+3. **URL della pagina Facebook** — sulla locandina c'è l'icona ma non l'indirizzo
    (`site.social.facebook`).
-5. **Codice fiscale / P.IVA dell'associazione** e pagina privacy, per il footer.
-6. **Modulo contatti**: vedi "Attivare il modulo contatti".
+4. **Codice fiscale / P.IVA dell'associazione** e pagina privacy, per il footer.
+5. **Modulo contatti**: vedi "Attivare il modulo contatti".
 
 Ogni punto è segnato con `TODO` nel codice.
 
@@ -100,19 +99,35 @@ uno basta una riga:
 `difficolta` accetta `facile`, `media`, `alta`. I filtri della pagina si
 aggiornano da soli.
 
-### Sostituire le foto
+### Le foto
 
-Le immagini in `src/images/` sono segnaposto generati da
-`scripts/generate-placeholders.mjs`. Per usare le foto vere:
+In `src/images/` ci sono le fotografie del circolo, tutte 4:3 a 1448×1086.
+`scripts/importa-foto.mjs` documenta quale scatto finisce dove.
 
-1. Sostituire i file in `src/images/galleria/` mantenendo i nomi
-   (`galleria-01.jpg` … `galleria-08.jpg`). Formato 16:9, almeno 1600×900.
-   Se ne servono di più o di meno, basta aggiungere/togliere file: il carosello
-   li legge dalla cartella.
-2. Aggiornare le didascalie in `src/data/galleria.ts`.
-3. Sostituire `hero.jpg` (verticale abbondante, almeno 2400×1600),
-   `circolo.jpg`, `ludoteca.jpg`, `tessera.jpg` (4:3) e `og.jpg` (1200×630,
-   è l'anteprima quando si condivide il link su WhatsApp e Facebook).
+Assegnazione:
+
+| File                     | Foto                                  |
+| ------------------------ | ------------------------------------- |
+| `hero.jpg`               | primo piano serale: carte, dadi, birra |
+| `circolo.jpg`            | i due soci davanti al cancello         |
+| `ludoteca.jpg`           | la pila di giochi davanti agli scaffali |
+| `tessera.jpg`            | la sala grande durante una partita     |
+| `galleria/galleria-0*.jpg` | ingresso, sala, ludoteca, serata, soci |
+
+Per cambiarle basta sostituire i file mantenendo i nomi, e aggiornare le
+didascalie in `src/data/galleria.ts`. Il carosello legge la cartella, quindi
+aggiungere o togliere foto dalla galleria funziona da solo.
+
+Il carosello è impostato su 4:3 apposta, per non tagliare le insegne e le teste
+delle persone: se un domani arrivano foto 16:9, si cambia `aspect-[4/3]` in
+`aspect-video` in `Carosello.astro`.
+
+⚠️ Gli originali sono larghi 1448 px, quindi su schermi molto grandi la hero
+può risultare un po' morbida. Se servissero versioni più grandi, vanno chieste
+al fotografo — ingrandirle via software peggiorerebbe soltanto.
+
+`npm run placeholders` non sovrascrive più niente: salta i file che esistono
+già. Serve `--force` per riportare i segnaposto.
 
 Astro converte tutto in WebP/AVIF e genera le dimensioni responsive da solo.
 
