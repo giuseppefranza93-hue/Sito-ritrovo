@@ -6,7 +6,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "placeholders": "node scripts/generate-placeholders.mjs"
+    "placeholders": "node scripts/generate-placeholders.mjs",
+    "anteprima": "astro build && node scripts/build-anteprima.mjs"
   },
   "repository": {
     "type": "git",
